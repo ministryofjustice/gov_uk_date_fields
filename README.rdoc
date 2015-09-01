@@ -1,3 +1,32 @@
 = GovUkDateFields
 
 This project rocks and uses MIT-LICENSE.
+
+== Overview
+
+This gem adds acts_as_gov_uk_date class method to ActiveRecord and gov_uk_date_field method to form builder 
+to simplify displaying, validating and persisting dates entered on a form with the GOV.UK standard three-box form.
+
+
+==== Example:
+ 
+    class Employee < ActiveRecord::Base
+
+      acts_as_gov_uk_date :dob, :joined
+
+    end
+
+The above code tells Active Record to expect the two named fields to be entered via a form, with individual fields, dob_dd, dob_mm and dob_yyyy and joined_dd, joined_mm and joined_yyyy. Instance attributes of type GovUkDate will be created, named @_dob and @_joined respectively, which will hold the original input values (so that they can be 
+displayed back to the user in case of error) and handle validation.  If valid, the real attributes self.dob 
+and self.joined will be populated accordingly, otherwise they will be left as is.
+
+
+== NOTE
+
+Populate form fields in the controller by:
+
+   GovUkDateFields::FormDate.set_from_params(object, <attribute>, params)
+
+e.g.
+
+  GovUkDateFields::FormDate.set_from_params(employee, :dob, params[:employee])

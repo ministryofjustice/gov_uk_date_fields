@@ -18,3 +18,14 @@ if ActiveSupport::TestCase.respond_to?(:fixture_path=)
   ActionDispatch::IntegrationTest.fixture_path = ActiveSupport::TestCase.fixture_path
   ActiveSupport::TestCase.fixtures :all
 end
+
+
+
+def assert_false(actual_value, message = nil)
+  assert_equal false, actual_value, "#{message} was expected to be false, is #{actual_value}"
+end
+
+
+def assert_true(actual_value, message = nil)
+  assert_equal true, actual_value, "#{message} was expected to be true, is #{actual_value}"
+end

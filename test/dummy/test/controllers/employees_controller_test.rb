@@ -17,13 +17,13 @@ class EmployeesControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  test "should create employee" do
-    assert_difference('Employee.count') do
-      post :create, employee: { dob: @employee.dob, joined: @employee.joined, name: @employee.name }
-    end
+  # test "should create employee" do
+  #   assert_difference('Employee.count') do
+  #     post :create, employee: { dob: @employee.dob, joined: @employee.joined, name: @employee.name }
+  #   end
 
-    assert_redirected_to employee_path(assigns(:employee))
-  end
+  #   assert_redirected_to employee_path(assigns(:employee))
+  # end
 
   test "should show employee" do
     get :show, id: @employee
@@ -35,10 +35,10 @@ class EmployeesControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  test "should update employee" do
-    patch :update, id: @employee, employee: { dob: @employee.dob, joined: @employee.joined, name: @employee.name }
-    assert_redirected_to employee_path(assigns(:employee))
-  end
+  # test "should update employee" do
+  #   patch :update, id: @employee, employee: { dob: @employee.dob, joined: @employee.joined, name: @employee.name }
+  #   assert_redirected_to employee_path(assigns(:employee))
+  # end
 
   test "should destroy employee" do
     assert_difference('Employee.count', -1) do
