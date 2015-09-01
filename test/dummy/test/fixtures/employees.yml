@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  dob: 2015-09-01
+  joined: 2015-09-01
+
+two:
+  name: MyString
+  dob: 2015-09-01
+  joined: 2015-09-01
