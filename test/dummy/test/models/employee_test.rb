@@ -51,7 +51,15 @@ class EmployeeTest < ActiveSupport::TestCase
     assert_equal '2015', @employee.instance_variable_get(:@_joined).yyyy
   end
 
-  def test_that_argument_error_is_raised_if_non_date_object_assigned_to_date_field
+  def test_that_nil_can_be_assigned_to_a_date_field
+    @employee.dob = nil
+    assert_equal nil, @employee.dob
+    assert_equal '', @employee.dob_dd
+    assert_equal '', @employee.dob_mm
+    assert_equal '', @employee.dob_yyyy
+  end
+
+  def test_that_argument_error_is_raised_if_non_date_non_nil_object_assigned_to_date_field
     err = assert_raise ArgumentError do
       @employee.dob = '12/3/1984'
     end
@@ -71,6 +79,22 @@ class EmployeeTest < ActiveSupport::TestCase
     @employee.dob_mm = 'jun'
     @employee.dob_yyyy = '1965'
     assert_equal Date.new(1965, 6, 17), @employee.dob 
+  end
+
+
+  def test_valid_dates_raise_no_errors
+    assert_true @employee.valid?, '@employee.valid?'
+  end
+
+  def test_nil_dates_raise_no_errors
+    @employee.dob = nil
+    assert_true @employee.valid?, '@employee.valid?'
+  end
+
+  def test_invalid_day_raises_error
+    @employee.dob_dd = '32'
+    assert_false @employee.valid?
+    assert_equal ['Invalid date'], @employee.errors[:dob]
   end
 
 

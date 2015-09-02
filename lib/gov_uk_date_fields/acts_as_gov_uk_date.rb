@@ -7,8 +7,25 @@ module GovUkDateFields
 
     module ClassMethods
       def acts_as_gov_uk_date(*date_fields)
+
+        validate :validate_gov_uk_dates
+
         cattr_accessor :_gov_uk_dates
         self._gov_uk_dates = date_fields
+
+
+        # call valid? on each of the gov_uk date fields, and add error messages
+        # into the errors hash if not valid
+        #
+        define_method(:validate_gov_uk_dates) do
+          date_fields.each do |date_field|
+            unless self.instance_variable_get("@_#{date_field}".to_sym).valid?
+              errors[date_field] << "Invalid date"
+            end
+          end
+        end
+
+
 
         # For each of the gov uk date fields, we have to define the following 
         # instance methods (assuming the date field name is dob):
@@ -16,8 +33,11 @@ module GovUkDateFields
         # * dob       - retuns the date object (i.e. @_dob.date)
         # * dob=      - populatees @_dob
         # * dob_dd    - returns the day value for form popualtion
+        # * dob_dd=   - sets the day value (used when updating from a form)
         # * dob_mm    - returns the month value for form popualtion
+        # * dob_mm=   - sets the month value (used when updating from a form)
         # * dob_yyyy  - returns the year value for form popualtion
+        # * dob_yyyy= - sets the year value (used when updating from a form)
         #
         date_fields.each do |field|
 
@@ -28,7 +48,7 @@ module GovUkDateFields
 
           # #dob=(date) = assigns a date to the GovukDateFields::FormDate object
           define_method("#{field}=") do |new_date|
-            raise ArgumentError.new("#{new_date} is not a Date object") unless new_date.is_a?(Date)
+            raise ArgumentError.new("#{new_date} is not a Date object") unless new_date.is_a?(Date) || new_date.nil?
             GovUkDateFields::FormDate.set_from_date(self, field, new_date)
           end
 
