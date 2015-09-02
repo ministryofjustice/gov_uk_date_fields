@@ -1,32 +1,69 @@
-= GovUkDateFields
-
-This project rocks and uses MIT-LICENSE.
+= GovUkDateFields - Day/Month/Year input boxes for Rails projects
 
 == Overview
 
-This gem adds acts_as_gov_uk_date class method to ActiveRecord and gov_uk_date_field method to form builder 
-to simplify displaying, validating and persisting dates entered on a form with the GOV.UK standard three-box form.
+The GOV.UK standard for date fields on web forms is to use three boxes - on each for day, month and year, rather 
+than the drop_down boxes that comes as standard on rails projects.  This gem provides the methods required to 
+easily include and validate dates entered into forms in this way.
 
 
-==== Example:
- 
-    class Employee < ActiveRecord::Base
+== Getting Started
 
-      acts_as_gov_uk_date :dob, :joined
+=== Add the Gem to your Gemfile
 
+Add the following line to your Gemfile:
+
+    gem 'gov_uk_date_fields'
+
+Then run bundle install.
+
+
+=== Tell your models which date fiels are gov_uk_dates
+
+To specify date fields on the database that are to be rendered and validated as gov_uk_date_fields, 
+simply add an acts_as_gov_uk_date to your model, e.g.:
+
+  class Employee < ActiveRecord::Base
+    acts_as_gov_uk_date :dob, :joined
+  end
+
+This tells the gem that there are two columns of type date on the database record for this model, dob and joined, which will be rendered as three boxes on the form.
+
+
+=== Update your form to render the three boxes
+
+Add code like this to your form:
+
+    <%= form_for(@employee) do |f| %>
+      <div class="field">
+        <%= f.label :dob %><br>
+        <%= f.gov_uk_date_field :dob %>
+      </div>
+
+      <div class="field">
+        <%= f.label :joined %><br>
+        <%= f.gov_uk_date_field :joined %>
+      </div>
+    <% end %>
+
+
+=== Permit the date parameters in your controller
+
+Your controller needs to permit three parameters for each gov_uk_date field, so in the example above the 
+employee_params method of the EmployeesController would be:
+
+    def employee_params
+      params.require(:employee).permit(:name, :dob_dd, :dob_mm, :dob_yyyy, :joined_dd, :joined_mm, :joined_yyyy)
     end
 
-The above code tells Active Record to expect the two named fields to be entered via a form, with individual fields, dob_dd, dob_mm and dob_yyyy and joined_dd, joined_mm and joined_yyyy. Instance attributes of type GovUkDate will be created, named @_dob and @_joined respectively, which will hold the original input values (so that they can be 
-displayed back to the user in case of error) and handle validation.  If valid, the real attributes self.dob 
-and self.joined will be populated accordingly, otherwise they will be left as is.
+And you're ready to go.  
+
+If the user enters values into the day/month/year boxes that can't be turned into a date, that field will be marked as 
+invalid in the errors hash of the model during the validation cycle, and the entered values will be displayed back to
+the user on the form.
 
 
-== NOTE
+== Licencing
 
-Populate form fields in the controller by:
+This project rocks and uses MIT-LICENSE.
 
-   GovUkDateFields::FormDate.set_from_params(object, <attribute>, params)
-
-e.g.
-
-  GovUkDateFields::FormDate.set_from_params(employee, :dob, params[:employee])
