@@ -10,6 +10,8 @@ module GovUkDateFields
 
         validate :validate_gov_uk_dates
 
+        after_initialize :populate_gov_uk_dates
+
         cattr_accessor :_gov_uk_dates
         self._gov_uk_dates = date_fields
 
@@ -22,6 +24,12 @@ module GovUkDateFields
             unless self.instance_variable_get("@_#{date_field}".to_sym).valid?
               errors[date_field] << "Invalid date"
             end
+          end
+        end
+
+        define_method(:populate_gov_uk_dates) do
+          self._gov_uk_dates.each do |date_field|
+            GovUkDateFields::FormDate.set_from_date(self, date_field, self[date_field])
           end
         end
 

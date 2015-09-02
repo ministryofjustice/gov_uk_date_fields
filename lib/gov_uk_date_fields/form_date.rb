@@ -31,9 +31,15 @@ module GovUkDateFields
 
     
     def self.set_date_part(date_part, object, attr_name, value)
-      form_date = object.instance_variable_get("@_#{attr_name}".to_sym)
+      form_date = object.instance_variable_get("@_#{attr_name}".to_sym) || FormDate.nil_date
       form_date.send("#{date_part}=", value)
       form_date.create_date_from_date_parts
+      FormDate.update_object(object, attr_name, form_date)
+    end
+
+
+    def self.nil_date
+      new('', '', '')
     end
 
 

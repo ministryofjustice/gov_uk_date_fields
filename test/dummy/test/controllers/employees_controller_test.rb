@@ -17,13 +17,24 @@ class EmployeesControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  # test "should create employee" do
-  #   assert_difference('Employee.count') do
-  #     post :create, employee: { dob: @employee.dob, joined: @employee.joined, name: @employee.name }
-  #   end
-
-  #   assert_redirected_to employee_path(assigns(:employee))
-  # end
+  test "should create employee" do
+    assert_difference('Employee.count') do
+      post :create, employee: { 
+        dob_dd:       '31', 
+        dob_mm:       '12',
+        dob_yyyy:     '1965',
+        joined_dd:    '4', 
+        joined_mm:    'mar', 
+        joined_yyyy:  '2015', 
+        name:         'Joe Blow' }
+    end
+    assert_redirected_to employee_path(assigns(:employee))
+    assert_equal 3, Employee.count
+    employee = Employee.last
+    assert_equal 'Joe Blow', employee.name
+    assert_equal Date.new(1965, 12, 31), employee.dob
+    assert_equal Date.new(2015, 3, 4), employee.joined
+  end
 
   test "should show employee" do
     get :show, id: @employee
@@ -35,10 +46,21 @@ class EmployeesControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  # test "should update employee" do
-  #   patch :update, id: @employee, employee: { dob: @employee.dob, joined: @employee.joined, name: @employee.name }
-  #   assert_redirected_to employee_path(assigns(:employee))
-  # end
+  test "should update employee" do
+    patch :update, id: @employee, employee: { 
+      dob_dd:       '1', 
+      dob_mm:       '11', 
+      dob_yyyy:     '1981', 
+      joined_dd:    '3', 
+      joined_mm:    'oct', 
+      joined_yyyy:  '2015', 
+      name:         'Ioannis Kole' }
+    assert_redirected_to employee_path(assigns(:employee))
+    e = Employee.find @employee.id
+    assert_equal Date.new(1981, 11, 1), e.dob
+    assert_equal Date.new(2015, 10, 3), e.joined
+    assert_equal 'Ioannis Kole', e.name
+  end
 
   test "should destroy employee" do
     assert_difference('Employee.count', -1) do
