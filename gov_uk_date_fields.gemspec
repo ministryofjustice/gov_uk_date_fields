@@ -9,15 +9,17 @@ Gem::Specification.new do |s|
   s.version     = GovUkDateFields::VERSION
   s.authors     = ["Stephen Richards"]
   s.email       = ["stephen.richards@digital.justice.gov.uk"]
-  s.homepage    = "TODO"
-  s.summary     = "TODO: Summary of GovUkDateFields."
-  s.description = "TODO: Description of GovUkDateFields."
+  s.homepage    = "https://github.com/ministryofjustice/gov_uk_date_fields"
+  s.summary     = "Enable day-month-year text edit fields for form date entry"
+  s.description = "Provides acts_as_gov_uk_date to mark Rails model attributes " +
+                  "as dates that will be entered as three separate text edit boxes, " +
+                  "and a form_builder method gov_uk_date_field to display those fields."
   s.license     = "MIT"
 
   s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.rdoc"]
   s.test_files = Dir["test/**/*"]
 
-  s.add_dependency "rails", "~> 4.2.4"
+  s.add_dependency "rails", ">= 4.0.0"
 
   s.add_development_dependency "pg"
 end

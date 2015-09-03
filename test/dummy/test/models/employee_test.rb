@@ -97,9 +97,30 @@ class EmployeeTest < ActiveSupport::TestCase
     assert_equal ['Invalid date'], @employee.errors[:dob]
   end
 
+  def test_createing_a_new_employee_with_valid_dates_is_valid
+    e = Employee.new(name: 'Stephen', dob_dd: '13', dob_mm: 'AUG', dob_yyyy: '1963')
+    assert_equal Date.new(1963, 8, 13), e.dob
+    assert_true e.valid?
+  end
 
+  def test_creating_a_new_employee_with_invalid_dates_is_invalid
+    e = Employee.new(name: 'Stephen', dob_dd: '13', dob_mm: 'XXX', dob_yyyy: '1963')
+    assert_equal nil, e.dob
+    assert_false e.valid?
+  end
 
+  def test_updating_existing_record_with_valid_dates_is_valid
+    @employee.save!
+    @employee.update(dob_dd: '17', dob_mm: '5', dob_yyyy: '1965')
+    assert_equal Date.new(1965, 5, 17), @employee.dob
+    assert_true @employee.valid?
+  end
 
-
+  def test_updating_existing_record_with_invalid_dates_is_invalid
+    @employee.save!
+    @employee.update(dob_dd: '47', dob_mm: '5', dob_yyyy: '1965')
+    assert_equal Date.new(1963, 8, 13), @employee.dob
+    assert_false @employee.valid?
+  end  
 
 end

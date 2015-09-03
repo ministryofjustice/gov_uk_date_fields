@@ -27,8 +27,12 @@ module GovUkDateFields
           end
         end
 
+
+        # This is an after initialize method.  We want to populate every gov_uk_date_field, unless it's a new
+        # record, and there is already a non-nil form date (this happens when you call new and pass a hash of attributes and values)
         define_method(:populate_gov_uk_dates) do
           self._gov_uk_dates.each do |date_field|
+            next if self.new_record? && self.instance_variable_get("@_#{date_field}".to_sym) != nil
             GovUkDateFields::FormDate.set_from_date(self, date_field, self[date_field])
           end
         end
