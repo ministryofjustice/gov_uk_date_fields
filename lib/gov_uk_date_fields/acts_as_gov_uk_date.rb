@@ -60,7 +60,8 @@ module GovUkDateFields
 
           # #dob=(date) = assigns a date to the GovukDateFields::FormDate object
           define_method("#{field}=") do |new_date|
-            raise ArgumentError.new("#{new_date} is not a Date object") unless new_date.is_a?(Date) || new_date.nil?
+            raise ArgumentError.new("#{new_date} is not a Date object") unless new_date.respond_to?(:to_date) || new_date.nil?
+            new_date = new_date.to_date unless new_date.nil?
             GovUkDateFields::FormDate.set_from_date(self, field, new_date)
           end
 
@@ -100,6 +101,7 @@ module GovUkDateFields
 
         include GovUkDateFields::ActsAsGovUkDate::LocalInstanceMethods
       end
+
     end
 
     module LocalInstanceMethods
