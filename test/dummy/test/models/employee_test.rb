@@ -59,12 +59,25 @@ class EmployeeTest < ActiveSupport::TestCase
     assert_equal '', @employee.dob_yyyy
   end
 
-  def test_that_argument_error_is_raised_if_non_date_non_nil_object_assigned_to_date_field
+  def test_that_argument_error_is_raised_if_unparseable_string_object_is_assigned_to_a_date_field
     err = assert_raise ArgumentError do
-      @employee.dob = '12/3/1984'
+      @employee.dob = 'Some string'
     end
     assert err.is_a?(ArgumentError)
-    assert_equal '12/3/1984 is not a Date object', err.message
+    assert_equal 'invalid date', err.message
+  end
+
+  def test_no_argument_error_is_raised_if_parseable_string_is_assigned_to_a_date_field
+    @employee.dob = '13/8/1963'
+    assert Date.new(1963, 8, 13), @employee.dob
+  end
+
+  def test_argument_error_is_raised_if_an_object_that_doesnt_respond_to_to_date_is_assigned_to_a_date_field
+    err = assert_raise ArgumentError do
+      @employee.dob = [13, 8, 1963]
+    end
+    assert err.is_a?(ArgumentError)
+    assert_equal "[13, 8, 1963] is not a Date object", err.message
   end
 
   def test_that_form_population_values_can_be_extracted_from_the_date_field
