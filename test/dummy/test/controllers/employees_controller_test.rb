@@ -69,4 +69,18 @@ class EmployeesControllerTest < ActionController::TestCase
 
     assert_redirected_to employees_path
   end
+
+  test "should render gov_uk_date_fields" do
+    get :edit, id: @employee
+
+    assert_select 'input#employee_dob_dd' do
+      assert_select '[placeholder]',true
+      assert_select '[placeholder=?]','DD'
+      assert_select '[size=?]','2'
+    end
+
+    assert_select 'input#employee_joined_dd' do
+      assert_select '[placeholder]',false
+    end
+  end
 end
