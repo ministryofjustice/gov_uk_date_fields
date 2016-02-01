@@ -12,4 +12,7 @@ gemspec
 
 # To use a debugger
 # gem 'byebug', group: [:development, :test]
+group :test  do
+  gem 'minitest-reporters', '~> 1.1', '>= 1.1.7'
+end
 
