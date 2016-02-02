@@ -7,11 +7,18 @@ module GovUkDateFields
       year:   '_yyyy'
     }
 
-    def initialize(form, object_name, attribute)
+    DEFAULT_PLACEHOLDERS = {
+      day: 'DD',
+      month: 'MM',
+      year: 'YYYY'
+    }
+
+    def initialize(form, object_name, attribute, options={})
       @form        = form
       @object      = form.object
       @object_name = object_name
       @attribute   = attribute
+      @options = options
     end
 
     def output
@@ -20,13 +27,21 @@ module GovUkDateFields
       year_value = @object.send("#{@attribute}_yyyy")
 
       %Q[
-        #{@form.text_field(@attribute, field_options(day_value, html_id(:day), html_name(:day), 'DD', 2))}
-        #{@form.text_field(@attribute, field_options(month_value, html_id(:month), html_name(:month), 'MM', 3))}
-        #{@form.text_field(@attribute, field_options(year_value, html_id(:year), html_name(:year), 'YYYY', 4))}
+        #{@form.text_field(@attribute, field_options(day_value, html_id(:day), html_name(:day), placeholder(:day), 2))}
+        #{@form.text_field(@attribute, field_options(month_value, html_id(:month), html_name(:month), placeholder(:month), 3))}
+        #{@form.text_field(@attribute, field_options(year_value, html_id(:year), html_name(:year), placeholder(:year), 4))}
       ].html_safe
     end
 
     private
+
+    def placeholder(part)
+      if @options[:placeholders] == true
+        DEFAULT_PLACEHOLDERS[part]
+      else
+        @options[:placeholders][part] || DEFAULT_PLACEHOLDERS[part] if @options[:placeholders]
+      end
+    end
 
     def html_id(date_segment)
       html_name(date_segment).gsub(/\]\[|\[|\]|\(/, '_').gsub(/\_\z/, '').gsub(/\)/, '')

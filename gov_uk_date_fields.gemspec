@@ -7,7 +7,7 @@ require "gov_uk_date_fields/version"
 Gem::Specification.new do |s|
   s.name        = "gov_uk_date_fields"
   s.version     = GovUkDateFields::VERSION
-  s.authors     = ["Stephen Richards"]
+  s.authors     = ["Stephen Richards","Joel Sugarman"]
   s.email       = ["stephen@stephenrichards.eu"]
   s.homepage    = "https://github.com/ministryofjustice/gov_uk_date_fields"
   s.summary     = "Enable day-month-year text edit fields for form date entry"

@@ -62,10 +62,17 @@ Add code like this to your form to display the three text boxes:
       </div>
     <% end %>
 
+Placeholders:
 
+  supply your own
 
+    <%= f.gov_uk_date_field :dob, placeholders: { day: 'dd', month: 'mm', year: 'yyyy' } %>
 
-And you're ready to go.  
+  or enable defaults (DD/MM/YYYY)
+
+    <%= f.gov_uk_date_field :dob, placeholders: true %>
+
+And you're ready to go.
 
 If the user enters values into the day/month/year boxes that can't be turned into a date, the attribute will be marked as 
 invalid in the model's errors hash during the validation cycle, and the entered values will be displayed back to
