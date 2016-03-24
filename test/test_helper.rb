@@ -1,5 +1,6 @@
 # Configure Rails Environment
 ENV["RAILS_ENV"] = "test"
+require 'byebug'
 
 require File.expand_path("../../test/dummy/config/environment.rb",  __FILE__)
 ActiveRecord::Migrator.migrations_paths = [File.expand_path("../../test/dummy/db/migrate", __FILE__)]
@@ -35,3 +36,15 @@ end
 def assert_true(actual_value, message = nil)
   assert_equal true, actual_value, "#{message} was expected to be true, is #{actual_value}"
 end
+
+
+def assert_html_equal(actual_html, expected_html)
+  assert_equal(squash_html(actual_html), squash_html(expected_html), "\nExpected: #{squash_html(expected_html)}\nGot:      #{squash_html(actual_html)}")
+end
+
+def squash_html(html)
+  html.gsub("\n", "").gsub(/\s*</, "<").gsub(/>\s*/, ">")
+end
+
+
+
