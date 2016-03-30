@@ -37,7 +37,7 @@ class GovUkDateFieldsTest < ActiveSupport::TestCase
   end
 
   test 'fieldset_output_with_form_hint' do
-    date_fields = GovUkDateFields::FormFields.new(@form_builder, :employee, :dob, {legend_text: 'Date of birth', legend_class: 'govuk_legend_class', form_hint_text: 'For example, 31 3 1980'})
+    date_fields = GovUkDateFields::FormFields.new(@form_builder, :employee, :dob, {legend_text: 'Date of birth', legend_class: 'govuk_legend_class', form_hint_text: 'In the form: dd mm yyyy'})
     assert_html_equal(date_fields.raw_output, expected_fieldset_output_with_form_hint)
   end
 
@@ -76,7 +76,7 @@ class GovUkDateFieldsTest < ActiveSupport::TestCase
       <fieldset>
         <legend class="govuk_legend_class">Date of birth</legend>
         <div class="form-date">
-          <p class="form-hint" id="dob-hint">For example, 31 3 1980</p>
+          <p class="form-hint" id="dob-hint">In the form: dd mm yyyy</p>
           <div class="form-group form-group-day">
             <label for="dob-day">Day</label>
             <input class="form-control" id="dob-day" name="dob-day" type="number" pattern="[0-9]*" min="0" max="31" aria-describedby="dob-hint" value="7">
