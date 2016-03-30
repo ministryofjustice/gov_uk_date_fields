@@ -101,7 +101,65 @@ invalid in the model's errors hash during the validation cycle, and the entered 
 the user on the form.
 
 
+## FAQs
 
+### What is the HTML that this gem produces?
+
+Given an employee object with the dob attribute set to
+  
+    Date.new(1965, 7, 13)
+  
+the following call to the gov_uk_date_field method:
+
+    f.gov_uk_date_field(:dob, legend_text: 'Date of birth', legend_class: 'govuk-legend')
+    
+will produce the following HTML:
+
+      <fieldset>
+        <legend class="govuk_legend">Date of birth</legend>
+        <div class="form-date">
+          <p class="form-hint" id="dob-hint">For example, 31 3 1980</p>
+          <div class="form-group form-group-day">
+            <label for="dob-day">Day</label>
+            <input class="form-control" 
+                   id="dob-day" 
+                   name="dob-day" 
+                   type="number" 
+                   pattern="[0-9]*" 
+                   min="0"
+                   max="31" 
+                   aria-describedby="dob-hint" 
+                   value="13">
+          </div>
+          <div class="form-group form-group-month">
+            <label for="dob-month">Month</label>
+            <input class="form-control" 
+                   id="dob-month" 
+                   name="dob-month" 
+                   type="number" 
+                   pattern="[0-9]*" 
+                   min="0" 
+                   max="12" 
+                   value="7">
+          </div>
+          <div class="form-group form-group-year">
+            <label for="dob-year">Year</label>
+            <input class="form-control" 
+                   id="dob-year" 
+                   name="dob-year" 
+                   type="number" 
+                   pattern="[0-9]*" 
+                   min="0" 
+                   max="2016" 
+                   value="1965">
+          </div>
+        </div>
+      </fieldset>
+
+
+
+See other examples in the file `test/form_fields_test.rb
+`
 ## Licencing
 
 This project rocks and uses MIT-LICENSE.
