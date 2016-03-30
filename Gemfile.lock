@@ -1,8 +1,8 @@
 PATH
   remote: .
   specs:
-    gov_uk_date_fields (0.1.0)
-      rails (>= 4.0.0)
+    gov_uk_date_fields (1.0.0)
+      rails (~> 4.0)
 
 GEM
   remote: https://rubygems.org/
@@ -44,6 +44,7 @@ GEM
       tzinfo (~> 1.1)
     ansi (1.5.0)
     arel (6.0.3)
+    awesome_print (1.6.1)
     builder (3.2.2)
     concurrent-ruby (1.0.0)
     erubis (2.7.0)
@@ -111,6 +112,10 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  awesome_print (~> 1.6)
   gov_uk_date_fields!
   minitest-reporters (~> 1.1, >= 1.1.7)
-  pg
+  pg (~> 0.18.0)
+
+BUNDLED WITH
+   1.11.2

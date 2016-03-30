@@ -1,6 +1,8 @@
 module GovUkDateFields
 
   class FormFields
+    VALID_OPTIONS = [:legend_text, :legend_class, :form_hint_text, :placeholders]
+
     DATE_SEGMENTS = {
       day:    '_dd',
       month:  '_mm',
@@ -14,26 +16,130 @@ module GovUkDateFields
     }
 
     def initialize(form, object_name, attribute, options={})
-      @form        = form
-      @object      = form.object
-      @object_name = object_name
-      @attribute   = attribute
-      @options = options
+      @form               = form
+      @object             = form.object
+      @object_name        = object_name
+      @attribute          = attribute
+      @options            = options
+      @day_value           = @object.send("#{@attribute}_dd")
+      @month_value         = @object.send("#{@attribute}_mm")
+      @year_value          = @object.send("#{@attribute}_yyyy")
+      @fieldset_required  = false
+      parse_options
+    end
+
+    def raw_output
+      if fieldset_required?
+        generate_input_fields
+      else
+        generate_old_style_input_fields
+      end
     end
 
     def output
-      day_value = @object.send("#{@attribute}_dd")
-      month_value = @object.send("#{@attribute}_mm")
-      year_value = @object.send("#{@attribute}_yyyy")
-
-      %Q[
-        #{@form.text_field(@attribute, field_options(day_value, html_id(:day), html_name(:day), placeholder(:day), 2))}
-        #{@form.text_field(@attribute, field_options(month_value, html_id(:month), html_name(:month), placeholder(:month), 3))}
-        #{@form.text_field(@attribute, field_options(year_value, html_id(:year), html_name(:year), placeholder(:year), 4))}
-      ].html_safe
+      raw_output.html_safe
     end
 
     private
+
+    def fieldset_required?
+      @fieldset_required
+    end
+
+    def generate_old_style_input_fields
+      %Q[
+        #{@form.text_field(@attribute, field_options(@day_value, html_id(:day), html_name(:day), placeholder(:day), 2))}
+        #{@form.text_field(@attribute, field_options(@month_value, html_id(:month), html_name(:month), placeholder(:month), 3))}
+        #{@form.text_field(@attribute, field_options(@year_value, html_id(:year), html_name(:year), placeholder(:year), 4))}
+      ]
+    end
+
+    def generate_start_fieldset
+      %Q|
+        <fieldset>
+          #{generate_legend_tag}#{@options[:legend_text]}</legend>
+          <div class="form-date">
+            <p class="form-hint" id="#{@attribute}-hint">For example, 31 3 1980</p>
+      |
+    end
+
+    def generate_end_fieldset
+      "</div></fieldset>"
+    end
+
+    def generate_legend_tag
+      if @options.key?(:legend_class)
+        %Q|<legend class="#{@options[:legend_class]}">|
+      else
+        "<legend>"
+      end
+    end
+
+    def generate_day_value
+      %Q|value="#{@day_value}"|
+    end
+
+    def generate_month_value
+      %Q|value="#{@month_value}"|
+    end
+
+    def generate_year_value
+      %Q|value="#{@year_value}"|
+    end
+
+    def generate_input_fields
+      result = generate_start_fieldset
+      result += generate_day_input_field(@ay_value) + generate_month_input_field(@month_value) + generate_year_input_field(@year_value)
+      result += generate_end_fieldset
+      result
+    end
+
+    def generate_day_input_field(day_value)
+      %Q|
+          <div class="form-group form-group-day">
+            <label for="#{@attribute}-day">Day</label>
+            <input class="form-control" id="#{@attribute}-day" name="#{@attribute}-day" type="number" pattern="[0-9]*" min="0" max="31" aria-describedby="#{@attribute}-hint" #{generate_day_value}>
+          </div>
+      |
+    end
+
+    def generate_month_input_field(month_value)
+      %Q|
+        <div class="form-group form-group-month">
+          <label for="#{@attribute}-month">Month</label>
+          <input class="form-control" id="#{@attribute}-month" name="#{@attribute}-month" type="number" pattern="[0-9]*" min="0" max="12" #{generate_month_value}>
+        </div>
+      |
+    end
+
+    def generate_year_input_field(year_value)
+      %Q|
+        <div class="form-group form-group-year">
+          <label for="#{@attribute}-year">Year</label>
+          <input class="form-control" id="#{@attribute}-year" name="#{@attribute}-year" type="number" pattern="[0-9]*" min="0" max="#{Date.today.year}" #{generate_year_value}>
+        </div>
+      |
+    end
+
+    def parse_options
+      validate_option_keys
+      if @options.key?(:legend_text)
+        @fieldset_required = true
+      else
+        if @options.key?(:legend_class) || @options.key?(:form_hint_text)
+          raise ArgumentError.new("Invalid combination of options: You must specifigy :legend_text if :legend_class or :form_hint_text are specified")
+        end
+      end
+    end
+
+    def validate_option_keys
+      @options.keys.each do |option_key|
+        unless VALID_OPTIONS.include?(option_key)
+          raise ArgumentError.new("Invalid option key: #{option_key.inspect}")
+        end
+      end
+    end
+
 
     def placeholder(part)
       if @options[:placeholders] == true
