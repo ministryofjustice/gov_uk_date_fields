@@ -21,9 +21,10 @@ module GovUkDateFields
       @object_name        = object_name
       @attribute          = attribute
       @options            = options
-      @day_value           = @object.send("#{@attribute}_dd")
-      @month_value         = @object.send("#{@attribute}_mm")
-      @year_value          = @object.send("#{@attribute}_yyyy")
+      @day_value          = @object.send("#{@attribute}_dd")
+      @month_value        = @object.send("#{@attribute}_mm")
+      @year_value         = @object.send("#{@attribute}_yyyy")
+      @form_hint_text     = @options[:form_hint_text] || "For example, 31 3 1980"
       @fieldset_required  = false
       parse_options
     end
@@ -59,7 +60,7 @@ module GovUkDateFields
         <fieldset>
           #{generate_legend_tag}#{@options[:legend_text]}</legend>
           <div class="form-date">
-            <p class="form-hint" id="#{@attribute}-hint">For example, 31 3 1980</p>
+            <p class="form-hint" id="#{@attribute}-hint">#{@form_hint_text}</p>
       |
     end
 
