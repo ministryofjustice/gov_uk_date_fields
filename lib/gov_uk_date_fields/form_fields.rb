@@ -1,7 +1,7 @@
 module GovUkDateFields
 
   class FormFields
-    VALID_OPTIONS = [:legend_text, :legend_class, :form_hint_text, :placeholders]
+    VALID_OPTIONS = [:legend_text, :legend_class, :form_hint_text, :id, :placeholders]
 
     DATE_SEGMENTS = {
       day:    '_dd',
@@ -26,6 +26,7 @@ module GovUkDateFields
       @year_value         = @object.send("#{@attribute}_yyyy")
       @form_hint_text     = @options[:form_hint_text] || "For example, 31 3 1980"
       @fieldset_required  = false
+      @fieldset_id        = @options[:id]
       parse_options
     end
 
@@ -57,11 +58,19 @@ module GovUkDateFields
 
     def generate_start_fieldset
       %Q|
-        <fieldset>
+        #{generate_fieldset_tag}
           #{generate_legend_tag}#{@options[:legend_text]}</legend>
           <div class="form-date">
             <p class="form-hint" id="#{@attribute}-hint">#{@form_hint_text}</p>
       |
+    end
+
+    def generate_fieldset_tag
+      if @fieldset_id.nil?
+        "<fieldset>"
+      else
+        %Q|<fieldset id="#{@fieldset_id}">|
+      end
     end
 
     def generate_end_fieldset
@@ -124,7 +133,7 @@ module GovUkDateFields
 
     def parse_options
       validate_option_keys
-      if @options.key?(:legend_text)
+      if @options.key?(:legend_text) || @options.key?(:id)
         @fieldset_required = true
       else
         if @options.key?(:legend_class) || @options.key?(:form_hint_text)
