@@ -65,20 +65,22 @@ The FormBuilder method gov_uk_date_field takes two parameters:
   
   * an option hash desribing how the date fields should be rendered:
   
-    - an empty hash or nil, means the date fields will be rendered as per version 0.1.0 of this gem, 
+    - **an empty hash or nil**: means the date fields will be rendered as per version 0.1.0 of this gem, 
       that is just three input fields with no encapsulating fieldset, divs, or legends.  This is 
       now deprecated and should no longer be used, but is included for backward 
       compatibility with versions 0.0.1 and 0.0.2.
       
-    - placeholder: see below for an explanation of how to specify placeholders.  This is now deprecated 
+    - **placeholder**: see below for an explanation of how to specify placeholders.  This is now deprecated 
       and should no longer be used, but is included for backward compatibility with versions 0.0.1 and 0.0.2.
       
-    - legend_text: The text that is to be used as the title of the Date field set.
+    - **legend_text**: The text that is to be used as the title of the Date field set.
     
-    - legend_class: The CSS class that is to be used for the legend
+    - **legend_class**: The CSS class that is to be used for the legend
     
-    - form_hint_text: The text that is to advise the user how to fill in the form.  If not specified, 
+    - **form_hint_text**: The text that is to advise the user how to fill in the form.  If not specified, 
       the text "For example, 31 3 1980" will be used.
+      
+    - **id**: The id to be given to the fieldset.  If absent, no id will be assigned to the fieldset.
 
 
 

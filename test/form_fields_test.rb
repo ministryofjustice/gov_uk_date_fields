@@ -40,11 +40,15 @@ class GovUkDateFieldsTest < ActiveSupport::TestCase
     date_fields = GovUkDateFields::FormFields.new(@form_builder, :employee, :dob, {legend_text: 'Date of birth', legend_class: 'govuk_legend_class', form_hint_text: 'In the form: dd mm yyyy'})
     assert_html_equal(date_fields.raw_output, expected_fieldset_output_with_form_hint)
   end
-
   
   test 'fieldset output with legend class' do
     date_fields = GovUkDateFields::FormFields.new(@form_builder, :employee, :joined, {legend_text: 'Joining date', legend_class: 'date-legend-class', form_hint_text: 'For example, 31 3 1980'})
     assert_html_equal(date_fields.raw_output, expected_fieldset_output_with_legend_class)
+  end
+
+  test 'fieldset with id' do
+    date_fields = GovUkDateFields::FormFields.new(@form_builder, :employee, :joined, {legend_text: 'Joining date', id: 'employee_date_joined'})
+    assert_html_equal(date_fields.raw_output, expected_fieldset_output_with_id)
   end
 
   test "squash_html" do
@@ -68,6 +72,29 @@ class GovUkDateFieldsTest < ActiveSupport::TestCase
       <input value="7" id="employee_dob_dd" name="employee[dob_dd]" placeholder="DAY" size="2" type="text" />
       <input value="12" id="employee_dob_mm" name="employee[dob_mm]" placeholder="MTH" size="3" type="text" />
       <input value="1963" id="employee_dob_yyyy" name="employee[dob_yyyy]" placeholder="YEAR" size="4" type="text" />
+    }
+  end
+
+  def expected_fieldset_output_with_id
+    %Q{
+      <fieldset id="employee_date_joined">
+        <legend>Joining date</legend>
+        <div class="form-date">
+          <p class="form-hint" id="joined-hint">For example, 31 3 1980</p>
+          <div class="form-group form-group-day">
+            <label for="joined-day">Day</label>
+            <input class="form-control" id="joined-day" name="joined-day" type="number" pattern="[0-9]*" min="0" max="31" aria-describedby="joined-hint" value="1">
+          </div>
+          <div class="form-group form-group-month">
+            <label for="joined-month">Month</label>
+            <input class="form-control" id="joined-month" name="joined-month" type="number" pattern="[0-9]*" min="0" max="12" value="4">
+          </div>
+          <div class="form-group form-group-year">
+            <label for="joined-year">Year</label>
+            <input class="form-control" id="joined-year" name="joined-year" type="number" pattern="[0-9]*" min="0" max="2016" value="2015">
+          </div>
+        </div>
+      </fieldset>
     }
   end
 
