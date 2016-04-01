@@ -108,7 +108,7 @@ module GovUkDateFields
       %Q|
           <div class="form-group form-group-day">
             <label for="#{@attribute}-day">Day</label>
-            <input class="form-control" id="#{@attribute}-day" name="#{@attribute}-day" type="number" pattern="[0-9]*" min="0" max="31" aria-describedby="#{@attribute}-hint" #{generate_day_value}>
+            <input class="form-control" id="#{html_name(:day)}" name="#{html_name(:day)}" type="number" pattern="[0-9]*" min="0" max="31" aria-describedby="#{@attribute}-hint" #{generate_day_value}>
           </div>
       |
     end
@@ -117,7 +117,7 @@ module GovUkDateFields
       %Q|
         <div class="form-group form-group-month">
           <label for="#{@attribute}-month">Month</label>
-          <input class="form-control" id="#{@attribute}-month" name="#{@attribute}-month" type="number" pattern="[0-9]*" min="0" max="12" #{generate_month_value}>
+          <input class="form-control" id="#{html_name(:month)}" name="#{html_name(:month)}" type="number" pattern="[0-9]*" min="0" max="12" #{generate_month_value}>
         </div>
       |
     end
@@ -126,7 +126,7 @@ module GovUkDateFields
       %Q|
         <div class="form-group form-group-year">
           <label for="#{@attribute}-year">Year</label>
-          <input class="form-control" id="#{@attribute}-year" name="#{@attribute}-year" type="number" pattern="[0-9]*" min="0" max="#{Date.today.year}" #{generate_year_value}>
+          <input class="form-control" id="#{html_name(:year)}" name="#{html_name(:year)}" type="number" pattern="[0-9]*" min="0" max="#{Date.today.year}" #{generate_year_value}>
         </div>
       |
     end

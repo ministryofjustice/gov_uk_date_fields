@@ -83,15 +83,15 @@ class GovUkDateFieldsTest < ActiveSupport::TestCase
           <p class="form-hint" id="joined-hint">For example, 31 3 1980</p>
           <div class="form-group form-group-day">
             <label for="joined-day">Day</label>
-            <input class="form-control" id="joined-day" name="joined-day" type="number" pattern="[0-9]*" min="0" max="31" aria-describedby="joined-hint" value="1">
+            <input class="form-control" id="employee[joined_dd]" name="employee[joined_dd]" type="number" pattern="[0-9]*" min="0" max="31" aria-describedby="joined-hint" value="1">
           </div>
           <div class="form-group form-group-month">
             <label for="joined-month">Month</label>
-            <input class="form-control" id="joined-month" name="joined-month" type="number" pattern="[0-9]*" min="0" max="12" value="4">
+            <input class="form-control" id="employee[joined_mm]" name="employee[joined_mm]" type="number" pattern="[0-9]*" min="0" max="12" value="4">
           </div>
           <div class="form-group form-group-year">
             <label for="joined-year">Year</label>
-            <input class="form-control" id="joined-year" name="joined-year" type="number" pattern="[0-9]*" min="0" max="2016" value="2015">
+            <input class="form-control" id="employee[joined_yyyy]" name="employee[joined_yyyy]" type="number" pattern="[0-9]*" min="0" max="2016" value="2015">
           </div>
         </div>
       </fieldset>
@@ -106,15 +106,15 @@ class GovUkDateFieldsTest < ActiveSupport::TestCase
           <p class="form-hint" id="dob-hint">In the form: dd mm yyyy</p>
           <div class="form-group form-group-day">
             <label for="dob-day">Day</label>
-            <input class="form-control" id="dob-day" name="dob-day" type="number" pattern="[0-9]*" min="0" max="31" aria-describedby="dob-hint" value="7">
+            <input class="form-control" id="employee[dob_dd]" name="employee[dob_dd]" type="number" pattern="[0-9]*" min="0" max="31" aria-describedby="dob-hint" value="7">
           </div>
           <div class="form-group form-group-month">
             <label for="dob-month">Month</label>
-            <input class="form-control" id="dob-month" name="dob-month" type="number" pattern="[0-9]*" min="0" max="12" value="12">
+            <input class="form-control" id="employee[dob_mm]" name="employee[dob_mm]" type="number" pattern="[0-9]*" min="0" max="12" value="12">
           </div>
           <div class="form-group form-group-year">
             <label for="dob-year">Year</label>
-            <input class="form-control" id="dob-year" name="dob-year" type="number" pattern="[0-9]*" min="0" max="2016" value="1963">
+            <input class="form-control" id="employee[dob_yyyy]" name="employee[dob_yyyy]" type="number" pattern="[0-9]*" min="0" max="2016" value="1963">
           </div>
         </div>
       </fieldset>
@@ -129,15 +129,15 @@ class GovUkDateFieldsTest < ActiveSupport::TestCase
           <p class="form-hint" id="joined-hint">For example, 31 3 1980</p>
           <div class="form-group form-group-day">
             <label for="joined-day">Day</label>
-            <input class="form-control" id="joined-day" name="joined-day" type="number" pattern="[0-9]*" min="0" max="31" aria-describedby="joined-hint" value="1">
+            <input class="form-control" id="employee[joined_dd]" name="employee[joined_dd]" type="number" pattern="[0-9]*" min="0" max="31" aria-describedby="joined-hint" value="1">
           </div>
           <div class="form-group form-group-month">
             <label for="joined-month">Month</label>
-            <input class="form-control" id="joined-month" name="joined-month" type="number" pattern="[0-9]*" min="0" max="12" value="4">
+            <input class="form-control" id="employee[joined_mm]" name="employee[joined_mm]" type="number" pattern="[0-9]*" min="0" max="12" value="4">
           </div>
           <div class="form-group form-group-year">
             <label for="joined-year">Year</label>
-            <input class="form-control" id="joined-year" name="joined-year" type="number" pattern="[0-9]*" min="0" max="#{Date.today.year}" value="2015">
+            <input class="form-control" id="employee[joined_yyyy]" name="employee[joined_yyyy]" type="number" pattern="[0-9]*" min="0" max="#{Date.today.year}" value="2015">
           </div>
         </div>
       </fieldset>
