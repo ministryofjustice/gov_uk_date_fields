@@ -42,7 +42,11 @@ module GovUkDateFields
       raw_output.html_safe
     end
 
-    private
+  private
+
+    def error_for_attr?
+      @object.errors.keys.include?(@attribute)
+    end
 
     def fieldset_required?
       @fieldset_required
@@ -66,11 +70,10 @@ module GovUkDateFields
     end
 
     def generate_fieldset_tag
-      if @fieldset_id.nil?
-        "<fieldset>"
-      else
-        %Q|<fieldset id="#{@fieldset_id}">|
-      end
+      result = "<fieldset"
+      result += %Q| id="#{@fieldset_id}"| unless  @fieldset_id.nil?
+      result += %Q| class="error"| if error_for_attr?
+      result ++ ">"
     end
 
     def generate_end_fieldset

@@ -1,3 +1,5 @@
+require 'mocha/test_unit'
+
 require  File.dirname(File.expand_path(__FILE__)) + '/test_helper'
 
 class MockTemplate
@@ -51,6 +53,12 @@ class GovUkDateFieldsTest < ActiveSupport::TestCase
     assert_html_equal(date_fields.raw_output, expected_fieldset_output_with_id)
   end
 
+  test 'fieldset with error_class' do
+    @employee.stubs(:errors).returns(  {joined: 'wrong'} )
+    date_fields = GovUkDateFields::FormFields.new(@form_builder, :employee, :joined, {legend_text: 'Joining date', id: 'employee_date_joined'})
+    assert_html_equal(date_fields.raw_output, expected_fieldset_output_with_error_class)
+  end
+
   test "squash_html" do
     html = "   <html>  This is some   text \n  <tr>  \n    <td>  <%=   dfkhdfh   %>  </td>  </tr>\n</html> "
     expected_result = "<html>This is some   text<tr><td><%=   dfkhdfh   %></td></tr></html>"
@@ -72,6 +80,29 @@ class GovUkDateFieldsTest < ActiveSupport::TestCase
       <input value="7" id="employee_dob_dd" name="employee[dob_dd]" placeholder="DAY" size="2" type="text" />
       <input value="12" id="employee_dob_mm" name="employee[dob_mm]" placeholder="MTH" size="3" type="text" />
       <input value="1963" id="employee_dob_yyyy" name="employee[dob_yyyy]" placeholder="YEAR" size="4" type="text" />
+    }
+  end
+
+  def expected_fieldset_output_with_error_class
+    %Q{
+      <fieldset id="employee_date_joined" class="error">
+        <legend>Joining date</legend>
+        <div class="form-date">
+          <p class="form-hint" id="joined-hint">For example, 31 3 1980</p>
+          <div class="form-group form-group-day">
+            <label for="joined-day">Day</label>
+            <input class="form-control" id="employee[joined_dd]" name="employee[joined_dd]" type="number" pattern="[0-9]*" min="0" max="31" aria-describedby="joined-hint" value="1">
+          </div>
+          <div class="form-group form-group-month">
+            <label for="joined-month">Month</label>
+            <input class="form-control" id="employee[joined_mm]" name="employee[joined_mm]" type="number" pattern="[0-9]*" min="0" max="12" value="4">
+          </div>
+          <div class="form-group form-group-year">
+            <label for="joined-year">Year</label>
+            <input class="form-control" id="employee[joined_yyyy]" name="employee[joined_yyyy]" type="number" pattern="[0-9]*" min="0" max="2016" value="2015">
+          </div>
+        </div>
+      </fieldset>
     }
   end
 

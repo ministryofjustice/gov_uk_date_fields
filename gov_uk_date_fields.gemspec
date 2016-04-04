@@ -23,4 +23,5 @@ Gem::Specification.new do |s|
 
   s.add_development_dependency "pg", "~> 0.18.0"
   s.add_development_dependency "awesome_print", "~> 1.6"
+  s.add_development_dependency 'mocha', '~> 1.1'
 end
