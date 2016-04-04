@@ -65,6 +65,7 @@ module GovUkDateFields
         #{generate_fieldset_tag}
           #{generate_legend_tag}#{@options[:legend_text]}</legend>
           <div class="form-date">
+            #{generate_error_message}
             <p class="form-hint" id="#{@attribute}-hint">#{@form_hint_text}</p>
       |
     end
@@ -85,6 +86,17 @@ module GovUkDateFields
         %Q|<legend class="#{@options[:legend_class]}">|
       else
         "<legend>"
+      end
+    end
+
+    def generate_error_message
+      result = ''
+      if error_for_attr?
+        result = "<ul>"
+        @object.errors[@attribute].each do |message|
+          result += %Q|<li><span class="error-message">#{message}</span></li>|
+        end
+        result ++ "</ul>"
       end
     end
 

@@ -21,49 +21,50 @@ class GovUkDateFieldsTest < ActiveSupport::TestCase
   end
 
 
-  test "error raised if invalid options given" do
-    err = assert_raise do
-      GovUkDateFields::FormFields.new(@form_builder, :employee, :dob, rubbish: 'some_value')
-    end
-  end
+  # test "error raised if invalid options given" do
+  #   err = assert_raise do
+  #     GovUkDateFields::FormFields.new(@form_builder, :employee, :dob, rubbish: 'some_value')
+  #   end
+  # end
 
 
-  test "basic_output_without_fieldset" do
-    date_fields = GovUkDateFields::FormFields.new(@form_builder, :employee, :dob)
-    assert_html_equal(date_fields.raw_output, expected_basic_output_without_fieldset)
-  end
+  # test "basic_output_without_fieldset" do
+  #   date_fields = GovUkDateFields::FormFields.new(@form_builder, :employee, :dob)
+  #   assert_html_equal(date_fields.raw_output, expected_basic_output_without_fieldset)
+  # end
 
-  test 'placeholder_output_without_fieldset' do
-    date_fields = GovUkDateFields::FormFields.new(@form_builder, :employee, :dob, {placeholders: { day: 'DAY', month: 'MTH', year: 'YEAR' } })
-    assert_html_equal(date_fields.raw_output, expected_placeholder_output_without_fieldset)
-  end
+  # test 'placeholder_output_without_fieldset' do
+  #   date_fields = GovUkDateFields::FormFields.new(@form_builder, :employee, :dob, {placeholders: { day: 'DAY', month: 'MTH', year: 'YEAR' } })
+  #   assert_html_equal(date_fields.raw_output, expected_placeholder_output_without_fieldset)
+  # end
 
-  test 'fieldset_output_with_form_hint' do
-    date_fields = GovUkDateFields::FormFields.new(@form_builder, :employee, :dob, {legend_text: 'Date of birth', legend_class: 'govuk_legend_class', form_hint_text: 'In the form: dd mm yyyy'})
-    assert_html_equal(date_fields.raw_output, expected_fieldset_output_with_form_hint)
-  end
+  # test 'fieldset_output_with_form_hint' do
+  #   date_fields = GovUkDateFields::FormFields.new(@form_builder, :employee, :dob, {legend_text: 'Date of birth', legend_class: 'govuk_legend_class', form_hint_text: 'In the form: dd mm yyyy'})
+  #   assert_html_equal(date_fields.raw_output, expected_fieldset_output_with_form_hint)
+  # end
   
-  test 'fieldset output with legend class' do
-    date_fields = GovUkDateFields::FormFields.new(@form_builder, :employee, :joined, {legend_text: 'Joining date', legend_class: 'date-legend-class', form_hint_text: 'For example, 31 3 1980'})
-    assert_html_equal(date_fields.raw_output, expected_fieldset_output_with_legend_class)
-  end
+  # test 'fieldset output with legend class' do
+  #   date_fields = GovUkDateFields::FormFields.new(@form_builder, :employee, :joined, {legend_text: 'Joining date', legend_class: 'date-legend-class', form_hint_text: 'For example, 31 3 1980'})
+  #   assert_html_equal(date_fields.raw_output, expected_fieldset_output_with_legend_class)
+  # end
 
-  test 'fieldset with id' do
+  # test 'fieldset with id' do
+  #   date_fields = GovUkDateFields::FormFields.new(@form_builder, :employee, :joined, {legend_text: 'Joining date', id: 'employee_date_joined'})
+  #   assert_html_equal(date_fields.raw_output, expected_fieldset_output_with_id)
+  # end
+
+  test 'fieldset with error_class and message' do
+    @employee.errors[:joined] <<  "Invalid joining date"
+    @employee.errors[:joined] <<  "Joining date must be in the past"
     date_fields = GovUkDateFields::FormFields.new(@form_builder, :employee, :joined, {legend_text: 'Joining date', id: 'employee_date_joined'})
-    assert_html_equal(date_fields.raw_output, expected_fieldset_output_with_id)
+    assert_html_equal(date_fields.raw_output, expected_fieldset_output_with_error_class_and_message)
   end
 
-  test 'fieldset with error_class' do
-    @employee.stubs(:errors).returns(  {joined: 'wrong'} )
-    date_fields = GovUkDateFields::FormFields.new(@form_builder, :employee, :joined, {legend_text: 'Joining date', id: 'employee_date_joined'})
-    assert_html_equal(date_fields.raw_output, expected_fieldset_output_with_error_class)
-  end
-
-  test "squash_html" do
-    html = "   <html>  This is some   text \n  <tr>  \n    <td>  <%=   dfkhdfh   %>  </td>  </tr>\n</html> "
-    expected_result = "<html>This is some   text<tr><td><%=   dfkhdfh   %></td></tr></html>"
-    assert_html_equal(html, expected_result)
-  end
+  # test "squash_html" do
+  #   html = "   <html>  This is some   text \n  <tr>  \n    <td>  <%=   dfkhdfh   %>  </td>  </tr>\n</html> "
+  #   expected_result = "<html>This is some   text<tr><td><%=   dfkhdfh   %></td></tr></html>"
+  #   assert_html_equal(html, expected_result)
+  # end
 
 
   def expected_basic_output_without_fieldset 
@@ -83,11 +84,19 @@ class GovUkDateFieldsTest < ActiveSupport::TestCase
     }
   end
 
-  def expected_fieldset_output_with_error_class
+  def expected_fieldset_output_with_error_class_and_message
     %Q{
       <fieldset id="employee_date_joined" class="error">
         <legend>Joining date</legend>
         <div class="form-date">
+          <ul>
+            <li>
+              <span class="error-message">Invalid joining date</span>
+            </li>
+            <li>
+              <span class="error-message">Joining date must be in the past</span>
+            </li>
+          </ul>
           <p class="form-hint" id="joined-hint">For example, 31 3 1980</p>
           <div class="form-group form-group-day">
             <label for="joined-day">Day</label>
