@@ -6,7 +6,7 @@ module GovUkDateFields
     DATE_SEGMENTS = {
       day:    '_dd',
       month:  '_mm',
-      year:   '_yyyy'
+      year:   '_yyyy',
     }
 
     DEFAULT_PLACEHOLDERS = {
@@ -74,7 +74,8 @@ module GovUkDateFields
       result = "<fieldset"
       result += %Q| id="#{@fieldset_id}"| unless  @fieldset_id.nil?
       result += %Q| class="error"| if error_for_attr?
-      result ++ ">"
+      result += ">"
+      result
     end
 
     def generate_end_fieldset
@@ -96,8 +97,9 @@ module GovUkDateFields
         @object.errors[@attribute].each do |message|
           result += %Q|<li><span class="error-message">#{message}</span></li>|
         end
-        result ++ "</ul>"
+        result += "</ul>"
       end
+      result
     end
 
     def generate_day_value
@@ -122,8 +124,8 @@ module GovUkDateFields
     def generate_day_input_field(day_value)
       %Q|
           <div class="form-group form-group-day">
-            <label for="#{@attribute}-day">Day</label>
-            <input class="form-control" id="#{html_name(:day)}" name="#{html_name(:day)}" type="number" pattern="[0-9]*" min="0" max="31" aria-describedby="#{@attribute}-hint" #{generate_day_value}>
+            <label for="#{html_id(:day)}">Day</label>
+            <input class="form-control" id="#{html_id(:day)}" name="#{html_name(:day)}" type="number" pattern="[0-9]*" min="0" max="31" aria-describedby="#{@attribute}-hint" #{generate_day_value}>
           </div>
       |
     end
@@ -131,8 +133,8 @@ module GovUkDateFields
     def generate_month_input_field(month_value)
       %Q|
         <div class="form-group form-group-month">
-          <label for="#{@attribute}-month">Month</label>
-          <input class="form-control" id="#{html_name(:month)}" name="#{html_name(:month)}" type="number" pattern="[0-9]*" min="0" max="12" #{generate_month_value}>
+          <label for="#{html_id(:month)}">Month</label>
+          <input class="form-control" id="#{html_id(:month)}" name="#{html_name(:month)}" type="number" pattern="[0-9]*" min="0" max="12" #{generate_month_value}>
         </div>
       |
     end
@@ -140,8 +142,8 @@ module GovUkDateFields
     def generate_year_input_field(year_value)
       %Q|
         <div class="form-group form-group-year">
-          <label for="#{@attribute}-year">Year</label>
-          <input class="form-control" id="#{html_name(:year)}" name="#{html_name(:year)}" type="number" pattern="[0-9]*" min="0" max="#{Date.today.year}" #{generate_year_value}>
+          <label for="#{html_id(:year)}">Year</label>
+          <input class="form-control" id="#{html_id(:year)}" name="#{html_name(:year)}" type="number" pattern="[0-9]*" min="0" max="#{Date.today.year}" #{generate_year_value}>
         </div>
       |
     end
@@ -175,7 +177,7 @@ module GovUkDateFields
     end
 
     def html_id(date_segment)
-      html_name(date_segment).gsub(/\]\[|\[|\]|\(/, '_').gsub(/\_\z/, '').gsub(/\)/, '')
+      "#{@object_name}_#{@attribute}#{DATE_SEGMENTS[date_segment]}"
     end
 
     def html_name(date_segment)
