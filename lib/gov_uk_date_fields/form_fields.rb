@@ -177,11 +177,15 @@ module GovUkDateFields
     end
 
     def html_id(date_segment)
-      "#{@object_name}_#{@attribute}#{DATE_SEGMENTS[date_segment]}"
+      brackets2underscore(html_name(date_segment))
     end
 
     def html_name(date_segment)
       "#{@object_name}[#{@attribute}#{DATE_SEGMENTS[date_segment]}]"
+    end
+
+    def brackets2underscore(string)
+      string.tr('[','_').tr(']', '_').gsub('__', '_').gsub(/_$/, '')
     end
 
     def field_options(value, id, name, placeholder, size)
