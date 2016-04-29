@@ -1,7 +1,7 @@
 module GovUkDateFields
 
   class FormFields
-    VALID_OPTIONS = [:legend_text, :legend_class, :form_hint_text, :id, :placeholders]
+    VALID_OPTIONS = [:legend_text, :legend_class, :form_hint_text, :id, :placeholders, :error_messages]
 
     DATE_SEGMENTS = {
       day:    '_dd',
@@ -27,6 +27,7 @@ module GovUkDateFields
       @form_hint_text     = @options[:form_hint_text] || "For example, 31 3 1980"
       @fieldset_required  = false
       @fieldset_id        = @options[:id]
+      @error_messages     = @options[:error_messages]
       parse_options
     end
 
@@ -94,7 +95,10 @@ module GovUkDateFields
       result = ''
       if error_for_attr?
         result = "<ul>"
-        @object.errors[@attribute].each do |message|
+        if @error_messages.nil?
+          @error_messages = @object.errors[@attribute]
+        end
+        @error_messages.each do |message|
           result += %Q|<li><span class="error-message">#{message}</span></li>|
         end
         result += "</ul>"
