@@ -60,6 +60,13 @@ class GovUkDateFieldsTest < ActiveSupport::TestCase
     assert_html_equal(date_fields.raw_output, expected_fieldset_output_with_error_class_and_message)
   end
 
+  test 'fieldset with error_class and supplied error messages' do
+    @employee.errors[:joined] <<  "invalid"
+    @employee.errors[:joined] <<  "must_be_in_past"
+    date_fields = GovUkDateFields::FormFields.new(@form_builder, :employee, :joined, {legend_text: 'Joining date', id: 'employee_date_joined', error_messages: ['Invalid joining date', 'Joining date must be in the past']})
+    assert_html_equal(date_fields.raw_output, expected_fieldset_output_with_error_class_and_message)
+  end
+
   test "squash_html" do
     html = "   <html>  This is some   text \n  <tr>  \n    <td>  <%=   dfkhdfh   %>  </td>  </tr>\n</html> "
     expected_result = "<html>This is some   text<tr><td><%=   dfkhdfh   %></td></tr></html>"

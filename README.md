@@ -82,6 +82,10 @@ The FormBuilder method gov_uk_date_field takes two parameters:
       
     - **id**: The id to be given to the fieldset.  If absent, no id will be assigned to the fieldset.
 
+    - **error_messages**: Error messages to be attached to the field, if not the string in the errors collection of the object.
+      This is useful if the error messages are held in a translation file for example - the client should fetch the translations and
+      pass in as an array of strings as the value for this option.
+
 
 
 ##### 4.1.1 Placeholders:
