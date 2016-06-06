@@ -34,7 +34,9 @@ simply add an acts_as_gov_uk_date to your model wth the attribute names of the d
 
 This tells the gem that there are two columns of type date on the database record for this model, ```dob``` and ```joined```, which will be rendered as three boxes on the form.
 
+You can also specify a Proc or a Symbol pointing to a method that checks whether the date validations should be performed. This is optional and by default validations are always performed. Example:
 
+    acts_as_gov_uk_date :dob, :joined, validate_if: :perform_validation?
 
 ### 3. Permit the date parameters in your controller
 

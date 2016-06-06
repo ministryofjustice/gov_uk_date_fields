@@ -6,9 +6,12 @@ module GovUkDateFields
     end
 
     module ClassMethods
-      def acts_as_gov_uk_date(*date_fields)
+      DEFAULT_GOV_UK_DATE_OPTIONS = { validate_if: ->{ true } }.freeze
 
-        validate :validate_gov_uk_dates
+      def acts_as_gov_uk_date(*date_fields)
+        options = _extract_supported_options!(date_fields)
+
+        validate :validate_gov_uk_dates, if: options[:validate_if]
 
         after_initialize :populate_gov_uk_dates
 
@@ -102,6 +105,17 @@ module GovUkDateFields
         include GovUkDateFields::ActsAsGovUkDate::LocalInstanceMethods
       end
 
+      protected
+
+      def _supported_options
+        [:validate_if]
+      end
+
+      def _extract_supported_options!(args)
+        options = DEFAULT_GOV_UK_DATE_OPTIONS.merge(args.extract_options!)
+        options.assert_valid_keys(*_supported_options)
+        options
+      end
     end
 
     module LocalInstanceMethods
@@ -115,8 +129,6 @@ module GovUkDateFields
       #   MojDateFields::FormDate.set_from_date(self, :first_day_of_trial, self['first_day_of_trial'])
       # end
     end
-
-
   end
 end
 
