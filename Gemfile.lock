@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    gov_uk_date_fields (1.0.8)
+    gov_uk_date_fields (1.0.9)
       rails (~> 4.0)
 
 GEM
