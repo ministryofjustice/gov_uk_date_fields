@@ -28,6 +28,7 @@ module GovUkDateFields
       @fieldset_required  = false
       @fieldset_id        = @options[:id]
       @error_messages     = @options[:error_messages]
+      @hint_id            = @fieldset_id.nil? ? "#{@attribute}-hint" : "#{@fieldset_id}-hint"
       parse_options
     end
 
@@ -67,7 +68,7 @@ module GovUkDateFields
           #{generate_legend_tag}#{@options[:legend_text]}</legend>
           <div class="form-date">
             #{generate_error_message}
-            <p class="form-hint" id="#{@attribute}-hint">#{@form_hint_text}</p>
+            <p class="form-hint" id="#{@hint_id}">#{@form_hint_text}</p>
       |
     end
 
@@ -129,7 +130,7 @@ module GovUkDateFields
       %Q|
           <div class="form-group form-group-day">
             <label for="#{html_id(:day)}">Day</label>
-            <input class="form-control" id="#{html_id(:day)}" name="#{html_name(:day)}" type="number" min="0" max="31" aria-describedby="#{@attribute}-hint" #{generate_day_value}>
+            <input class="form-control" id="#{html_id(:day)}" name="#{html_name(:day)}" type="number" min="0" max="31" aria-describedby="#{@hint_id}" #{generate_day_value}>
           </div>
       |
     end

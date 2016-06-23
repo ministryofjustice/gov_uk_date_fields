@@ -82,7 +82,9 @@ The FormBuilder method gov_uk_date_field takes two parameters:
     - **form_hint_text**: The text that is to advise the user how to fill in the form.  If not specified, 
       the text "For example, 31 3 1980" will be used.
       
-    - **id**: The id to be given to the fieldset.  If absent, no id will be assigned to the fieldset.
+    - **id**: The id to be given to the fieldset.  If absent, no id will be assigned to the fieldset.  This setting also affects the id of the hint element:
+      if specified, then the hint element will have the fieldset id appended by '-hint', otherwise it will have the attribute name appeneded by '-hint'.  The hint-id is
+      referred to by the aria-described-by attribute on the input element.
 
     - **error_messages**: Error messages to be attached to the field, if not the string in the errors collection of the object.
       This is useful if the error messages are held in a translation file for example - the client should fetch the translations and

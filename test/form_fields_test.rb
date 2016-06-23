@@ -104,10 +104,10 @@ class GovUkDateFieldsTest < ActiveSupport::TestCase
               <span class="error-message">Joining date must be in the past</span>
             </li>
           </ul>
-          <p class="form-hint" id="joined-hint">For example, 31 3 1980</p>
+          <p class="form-hint" id="employee_date_joined-hint">For example, 31 3 1980</p>
           <div class="form-group form-group-day">
             <label for="employee_joined_dd">Day</label>
-            <input class="form-control" id="employee_joined_dd" name="employee[joined_dd]" type="number" min="0" max="31" aria-describedby="joined-hint" value="1">
+            <input class="form-control" id="employee_joined_dd" name="employee[joined_dd]" type="number" min="0" max="31" aria-describedby="employee_date_joined-hint" value="1">
           </div>
           <div class="form-group form-group-month">
             <label for="employee_joined_mm">Month</label>
@@ -127,10 +127,10 @@ class GovUkDateFieldsTest < ActiveSupport::TestCase
       <fieldset id="employee_date_joined">
         <legend>Joining date</legend>
         <div class="form-date">
-          <p class="form-hint" id="joined-hint">For example, 31 3 1980</p>
+          <p class="form-hint" id="employee_date_joined-hint">For example, 31 3 1980</p>
           <div class="form-group form-group-day">
             <label for="employee_joined_dd">Day</label>
-            <input class="form-control" id="employee_joined_dd" name="employee[joined_dd]" type="number" min="0" max="31" aria-describedby="joined-hint" value="1">
+            <input class="form-control" id="employee_joined_dd" name="employee[joined_dd]" type="number" min="0" max="31" aria-describedby="employee_date_joined-hint" value="1">
           </div>
           <div class="form-group form-group-month">
             <label for="employee_joined_mm">Month</label>
