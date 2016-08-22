@@ -75,7 +75,9 @@ module GovUkDateFields
     def generate_fieldset_tag
       result = "<fieldset"
       result += %Q| id="#{@fieldset_id}"| unless  @fieldset_id.nil?
-      result += %Q| class="error"| if error_for_attr?
+      css_class = "gov_uk_date"
+      css_class += " error" if error_for_attr?
+      result += %Q| class="#{css_class}"|
       result += ">"
       result
     end
