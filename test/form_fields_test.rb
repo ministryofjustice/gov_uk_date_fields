@@ -93,7 +93,7 @@ class GovUkDateFieldsTest < ActiveSupport::TestCase
 
   def expected_fieldset_output_with_error_class_and_message
     %Q{
-      <fieldset id="employee_date_joined" class="error">
+      <fieldset id="employee_date_joined" class="gov_uk_date error">
         <legend>Joining date</legend>
         <div class="form-date">
           <ul>
@@ -124,7 +124,7 @@ class GovUkDateFieldsTest < ActiveSupport::TestCase
 
   def expected_fieldset_output_with_id
     %Q{
-      <fieldset id="employee_date_joined">
+      <fieldset id="employee_date_joined" class="gov_uk_date">
         <legend>Joining date</legend>
         <div class="form-date">
           <p class="form-hint" id="employee_date_joined-hint">For example, 31 3 1980</p>
@@ -147,7 +147,7 @@ class GovUkDateFieldsTest < ActiveSupport::TestCase
 
   def expected_fieldset_output_with_form_hint
     %Q{
-      <fieldset>
+      <fieldset class="gov_uk_date">
         <legend class="govuk_legend_class">Date of birth</legend>
         <div class="form-date">
           <p class="form-hint" id="dob-hint">In the form: dd mm yyyy</p>
@@ -170,7 +170,7 @@ class GovUkDateFieldsTest < ActiveSupport::TestCase
 
   def expected_fieldset_output_with_legend_class
     %Q{
-      <fieldset>
+      <fieldset class="gov_uk_date">
         <legend class="date-legend-class">Joining date</legend>
         <div class="form-date">
           <p class="form-hint" id="joined-hint">For example, 31 3 1980</p>
