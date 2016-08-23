@@ -34,6 +34,30 @@ simply add an acts_as_gov_uk_date to your model wth the attribute names of the d
 
 This tells the gem that there are two columns of type date on the database record for this model, ```dob``` and ```joined```, which will be rendered as three boxes on the form.
 
+#### 2.1 Options that can be passed to ```acts_as_gov_uk_date```
+
+ * ```:validate_if``` Determines whether or not to validate the date as part of the model's validation routines.  Pass in the name of a method which returns true or false. If
+   not specified, true is assumed.
+
+ * ```:error_clash_behaviour``` - Determines what action to take with multiple error messages if the model's validation has added an error message to the errors hash for this field, and this gem also determines
+   that it is invalid.  Possible values are:
+   *  :append_gov_uk_date_field_error - This gem's 'Invalid date' message will be added to the errors hash, resulting in both error messages being displayed
+   *  :omit_gov_uk_date_field_error - The gem's 'Invalid date' message is discarded - ony the model's validation error message will be displayed
+   *  :override_with_gov_uk_date_field_error - The model's error message is discarded and this gem's 'Invalid date' message added to the error hash.  Only the invalid date will be displayed.
+
+   If the ```:error_clash_behaviour``` option is not specified, ```:append_gov_uk_date_field_error``` is assumed.
+
+#### 2.2 Examples
+
+    acts_as_gov_uk_date :date_of_birth, :date_joined, 
+                        validate_if: :perform_validation?, 
+                        error_clash_behaviour: :override_with_gov_uk_date_field_error
+
+    def perform_validation?
+      return true unless self.draft?
+    end
+
+
 You can also specify a Proc or a Symbol pointing to a method that checks whether the date validations should be performed. This is optional and by default validations are always performed. Example:
 
     acts_as_gov_uk_date :dob, :joined, validate_if: :perform_validation?

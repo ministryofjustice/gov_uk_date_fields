@@ -6,7 +6,8 @@ module GovUkDateFields
     end
 
     module ClassMethods
-      DEFAULT_GOV_UK_DATE_OPTIONS = { validate_if: ->{ true } }.freeze
+      VALID_ERROR_CLASH_BEHAVIOUR_OPTIONS = [ :append_gov_uk_date_field_error, :omit_gov_uk_date_field_error, :override_with_gov_uk_date_field_error]
+      DEFAULT_GOV_UK_DATE_OPTIONS = { validate_if: ->{ true }, error_clash_behaviour: VALID_ERROR_CLASH_BEHAVIOUR_OPTIONS.first }.freeze
 
       def acts_as_gov_uk_date(*date_fields)
         options = _extract_supported_options!(date_fields)
@@ -24,7 +25,14 @@ module GovUkDateFields
         #
         define_method(:validate_gov_uk_dates) do
           date_fields.each do |date_field|
-            unless self.instance_variable_get("@_#{date_field}".to_sym).valid?
+            next if self.instance_variable_get("@_#{date_field}".to_sym).valid?
+            case options[:error_clash_behaviour]
+            when :append_gov_uk_date_field_error
+              errors[date_field] << "Invalid date"
+            when :omit_gov_uk_date_field_error
+              next
+            when :override_with_gov_uk_date_field_error
+              errors[date_field].clear
               errors[date_field] << "Invalid date"
             end
           end
@@ -108,12 +116,13 @@ module GovUkDateFields
       protected
 
       def _supported_options
-        [:validate_if]
+        [:validate_if, :error_clash_behaviour]
       end
 
       def _extract_supported_options!(args)
         options = DEFAULT_GOV_UK_DATE_OPTIONS.merge(args.extract_options!)
         options.assert_valid_keys(*_supported_options)
+        raise ArgumentError.new("Invalid parameters specified for :error_clash_behaviour") unless options[:error_clash_behaviour].in?(VALID_ERROR_CLASH_BEHAVIOUR_OPTIONS)
         options
       end
     end
