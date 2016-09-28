@@ -47,7 +47,7 @@ module GovUkDateFields
   private
 
     def error_for_attr?
-      @object.errors.keys.include?(@attribute)
+      @object.errors.keys.include?(@attribute) && @object.errors[@attribute].any?
     end
 
     def fieldset_required?
