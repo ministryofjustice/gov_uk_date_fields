@@ -23,7 +23,22 @@ Add the following line to your Gemfile:
 Then run bundle install.
 
 
-### 2. Tell your models attributes are gov_uk_dates
+### 2. Get your app to load the GovUkDateFields assets
+
+#### 2.1 Stylesheets
+
+Add the following line to the file ```app/assets/stylesheets/application.css.scss```
+
+    @import 'govuk_date_fields';
+    
+#### 2.2 Javascript
+
+Add the following line to the file ```app/assets/javascripts/application.js```
+
+    //= require govuk_date_fields
+
+
+### 3. Tell your models attributes are gov_uk_dates
 
 To specify date fields on the database that are to be rendered and validated as gov_uk_date_fields, 
 simply add an acts_as_gov_uk_date to your model wth the attribute names of the date fields, e.g.:
@@ -34,7 +49,7 @@ simply add an acts_as_gov_uk_date to your model wth the attribute names of the d
 
 This tells the gem that there are two columns of type date on the database record for this model, ```dob``` and ```joined```, which will be rendered as three boxes on the form.
 
-#### 2.1 Options that can be passed to ```acts_as_gov_uk_date```
+#### 3.1 Options that can be passed to ```acts_as_gov_uk_date```
 
  * ```:validate_if``` Determines whether or not to validate the date as part of the model's validation routines.  Pass in the name of a method which returns true or false. If
    not specified, true is assumed.
@@ -47,7 +62,7 @@ This tells the gem that there are two columns of type date on the database recor
 
    If the ```:error_clash_behaviour``` option is not specified, ```:append_gov_uk_date_field_error``` is assumed.
 
-#### 2.2 Examples
+#### 3.2 Examples
 
     acts_as_gov_uk_date :date_of_birth, :date_joined, 
                         validate_if: :perform_validation?, 
@@ -62,7 +77,7 @@ You can also specify a Proc or a Symbol pointing to a method that checks whether
 
     acts_as_gov_uk_date :dob, :joined, validate_if: :perform_validation?
 
-### 3. Permit the date parameters in your controller
+### 4. Permit the date parameters in your controller
 
 Your controller needs to permit three parameters for each gov_uk_date field, so in the example above the 
 employee_params method of the EmployeesController would be:
@@ -72,7 +87,7 @@ employee_params method of the EmployeesController would be:
     end
 
 
-### 4. Update your form to render the three boxes
+### 5. Update your form to render the three boxes
 
 Use the gov_uk_date_field method that this gem adds into FormBuilder to create the three
 date field boxes in the form:
@@ -83,7 +98,7 @@ date field boxes in the form:
        <%= f.gov_uk_date_field :joined, legend_text: 'Date joined' %>
     <% end %>
 
-#### 4.1. Options passed to gov_uk_date_field
+#### 5.1. Options passed to gov_uk_date_field
 
 The FormBuilder method gov_uk_date_field takes two parameters:
   
@@ -113,10 +128,17 @@ The FormBuilder method gov_uk_date_field takes two parameters:
     - **error_messages**: Error messages to be attached to the field, if not the string in the errors collection of the object.
       This is useful if the error messages are held in a translation file for example - the client should fetch the translations and
       pass in as an array of strings as the value for this option.
+      
+    - **today_button**: If present, a "Today" button which, when presssed, will populate the form with today's date
+      will be generated.  The value of this option should either be:
+       * true: a Today button with the default value of "button" will be generated
+       * {class: "button-class"} a Today button with the specified CSS class(es) will be generated
+       * false: a Today button will not be generated
+      
 
 
 
-##### 4.1.1 Placeholders:
+##### 5.1.1 Placeholders:
 
   Supply your own
 
@@ -126,7 +148,7 @@ The FormBuilder method gov_uk_date_field takes two parameters:
 
     <%= f.gov_uk_date_field :dob, placeholders: true %>
 
-### 5.  You're done!
+### 6.  You're done!
 
 You're ready to go.
 

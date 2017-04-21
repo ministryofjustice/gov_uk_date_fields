@@ -12,7 +12,13 @@ gemspec
 
 # To use a debugger
 # gem 'byebug', group: [:development, :test]
-group :test  do
+group :test, :development do
   gem 'minitest-reporters', '~> 1.1', '>= 1.1.7'
+  gem 'pg', '~> 0.18.4'
+  gem'awesome_print', '~> 1.6'
+  gem 'mocha', '~> 1.1'
+  gem 'rails-controller-testing', '~> 1.0'
 end
+
+
 
