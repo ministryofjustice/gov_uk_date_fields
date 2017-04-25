@@ -9,3 +9,4 @@ test/dummy/.sass-cache
 .byebug_history
 .idea
 
+vendor/bundle

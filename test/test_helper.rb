@@ -5,6 +5,9 @@ require File.expand_path("../../test/dummy/config/environment.rb",  __FILE__)
 ActiveRecord::Migrator.migrations_paths = [File.expand_path("../../test/dummy/db/migrate", __FILE__)]
 require "rails/test_help"
 require "minitest/reporters"
+require 'rails-controller-testing'
+
+Rails::Controller::Testing.install
 
 # configure minitest reporting
 reporter_options = { color: true }

@@ -4,4 +4,5 @@ require 'gov_uk_date_fields/form_fields'
 require 'gov_uk_date_fields/form_builder'
 
 module GovUkDateFields
+  require 'gov_uk_date_fields/engine'
 end

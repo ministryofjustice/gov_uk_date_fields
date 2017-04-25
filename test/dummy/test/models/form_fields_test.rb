@@ -1,6 +1,6 @@
 require 'mocha/test_unit'
 
-require  File.dirname(File.expand_path(__FILE__)) + '/test_helper'
+require  File.dirname(File.expand_path(__FILE__)) + '/../../../test_helper'
 
 class MockTemplate
   include ActionView::Helpers::FormHelper
@@ -42,7 +42,7 @@ class GovUkDateFieldsTest < ActiveSupport::TestCase
     date_fields = GovUkDateFields::FormFields.new(@form_builder, :employee, :dob, {legend_text: 'Date of birth', legend_class: 'govuk_legend_class', form_hint_text: 'In the form: dd mm yyyy'})
     assert_html_equal(date_fields.raw_output, expected_fieldset_output_with_form_hint)
   end
-  
+
   test 'fieldset output with legend class' do
     date_fields = GovUkDateFields::FormFields.new(@form_builder, :employee, :joined, {legend_text: 'Joining date', legend_class: 'date-legend-class', form_hint_text: 'For example, 31 3 1980'})
     assert_html_equal(date_fields.raw_output, expected_fieldset_output_with_legend_class)
@@ -51,6 +51,16 @@ class GovUkDateFieldsTest < ActiveSupport::TestCase
   test 'fieldset with id' do
     date_fields = GovUkDateFields::FormFields.new(@form_builder, :employee, :joined, {legend_text: 'Joining date', id: 'employee_date_joined'})
     assert_html_equal(date_fields.raw_output, expected_fieldset_output_with_id)
+  end
+
+  test 'fieldset output with today button with no css class specified' do
+    date_fields = GovUkDateFields::FormFields.new(@form_builder, :employee, :joined, {legend_text: 'Joining date', id: 'employee_date_joined', today_button: true})
+    assert_html_equal(date_fields.raw_output, expected_fieldset_output_with_unstyled_today_button)
+  end
+
+  test 'fieldset output with today button with css class applied' do
+    date_fields = GovUkDateFields::FormFields.new(@form_builder, :employee, :joined, {legend_text: 'Joining date', id: 'employee_date_joined', today_button: {class: 'today-button-class'} } )
+    assert_html_equal(date_fields.raw_output, expected_fieldset_output_with_syled_today_button)
   end
 
   test 'fieldset with error_class and message' do
@@ -74,7 +84,7 @@ class GovUkDateFieldsTest < ActiveSupport::TestCase
   end
 
 
-  def expected_basic_output_without_fieldset 
+  def expected_basic_output_without_fieldset
     %Q{
       <input value="7" id="employee_dob_dd" name="employee[dob_dd]" size="2" type="text" />
       <input value="12" id="employee_dob_mm" name="employee[dob_mm]" size="3" type="text" />
@@ -191,5 +201,52 @@ class GovUkDateFieldsTest < ActiveSupport::TestCase
     }
   end
 
+  def expected_fieldset_output_with_unstyled_today_button
+    %Q{
+      <fieldset id="employee_date_joined" class="gov_uk_date">
+        <legend>Joining date</legend>
+        <div class="form-date">
+          <p class="form-hint" id="employee_date_joined-hint">For example, 31 3 1980</p>
+          <a class="button" role="button" href="#">Today</a>
+          <div class="form-group form-group-day">
+              <label for="employee_joined_dd">Day</label>
+              <input class="form-control" id="employee_joined_dd" name="employee[joined_dd]" type="number" min="0" max="31" aria-describedby="employee_date_joined-hint" value="1">
+          </div>
+          <div class="form-group form-group-month">
+              <label for="employee_joined_mm">Month</label>
+              <input class="form-control" id="employee_joined_mm" name="employee[joined_mm]" type="number" min="0" max="12" value="4">
+          </div>
+          <div class="form-group form-group-year">
+              <label for="employee_joined_yyyy">Year</label>
+              <input class="form-control" id="employee_joined_yyyy" name="employee[joined_yyyy]" type="number" min="0" max="2100" value="2015">
+          </div>
+        </div>
+      </fieldset>
+    }
+  end
+
+  def expected_fieldset_output_with_syled_today_button
+    %Q{
+      <fieldset id="employee_date_joined" class="gov_uk_date">
+        <legend>Joining date</legend>
+        <div class="form-date">
+          <p class="form-hint" id="employee_date_joined-hint">For example, 31 3 1980</p>
+          <a class="today-button-class" role="button" href="#">Today</a>
+          <div class="form-group form-group-day">
+              <label for="employee_joined_dd">Day</label>
+              <input class="form-control" id="employee_joined_dd" name="employee[joined_dd]" type="number" min="0" max="31" aria-describedby="employee_date_joined-hint" value="1">
+          </div>
+          <div class="form-group form-group-month">
+              <label for="employee_joined_mm">Month</label>
+              <input class="form-control" id="employee_joined_mm" name="employee[joined_mm]" type="number" min="0" max="12" value="4">
+          </div>
+          <div class="form-group form-group-year">
+              <label for="employee_joined_yyyy">Year</label>
+              <input class="form-control" id="employee_joined_yyyy" name="employee[joined_yyyy]" type="number" min="0" max="2100" value="2015">
+          </div>
+        </div>
+      </fieldset>
+    }
+  end
 
 end

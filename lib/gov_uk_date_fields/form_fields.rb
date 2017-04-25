@@ -1,7 +1,7 @@
 module GovUkDateFields
 
   class FormFields
-    VALID_OPTIONS = [:legend_text, :legend_class, :form_hint_text, :id, :placeholders, :error_messages]
+    VALID_OPTIONS = [:legend_text, :legend_class, :form_hint_text, :id, :placeholders, :error_messages, :today_button]
 
     DATE_SEGMENTS = {
       day:    '_dd',
@@ -29,6 +29,7 @@ module GovUkDateFields
       @fieldset_id        = @options[:id]
       @error_messages     = @options[:error_messages]
       @hint_id            = @fieldset_id.nil? ? "#{@attribute}-hint" : "#{@fieldset_id}-hint"
+      @today_button       = @options[:today_button] || false
       parse_options
     end
 
@@ -123,9 +124,30 @@ module GovUkDateFields
 
     def generate_input_fields
       result = generate_start_fieldset
-      result += generate_day_input_field(@ay_value) + generate_month_input_field(@month_value) + generate_year_input_field(@year_value)
+      result += generate_today_button if @today_button
+      result += generate_day_input_field(@day_value) + generate_month_input_field(@month_value) + generate_year_input_field(@year_value)
       result += generate_end_fieldset
       result
+    end
+
+    def today_button_class
+      if @today_button.is_a?(Hash) && @today_button.key?(:class)
+        @today_button[:class]
+      else
+        'button'
+      end
+    end
+
+    def generate_today_button
+      %Q|<a class="#{today_button_class}" role="button" href="#">Today</a>|
+    end
+
+    def generate_start_div
+      %Q|<div class="form-group form-group-day">|
+    end
+
+    def generate_end_div
+      %Q|</div>|
     end
 
     def generate_day_input_field(day_value)

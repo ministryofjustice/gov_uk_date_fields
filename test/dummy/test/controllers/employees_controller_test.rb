@@ -19,14 +19,14 @@ class EmployeesControllerTest < ActionController::TestCase
 
   test "should create employee" do
     assert_difference('Employee.count') do
-      post :create, employee: { 
-        dob_dd:       '31', 
+      post :create, params: { employee: {
+        dob_dd:       '31',
         dob_mm:       '12',
         dob_yyyy:     '1965',
-        joined_dd:    '4', 
-        joined_mm:    'mar', 
-        joined_yyyy:  '2015', 
-        name:         'Joe Blow' }
+        joined_dd:    '4',
+        joined_mm:    'mar',
+        joined_yyyy:  '2015',
+        name:         'Joe Blow' }}
     end
     assert_redirected_to employee_path(assigns(:employee))
     assert_equal 3, Employee.count
@@ -37,24 +37,24 @@ class EmployeesControllerTest < ActionController::TestCase
   end
 
   test "should show employee" do
-    get :show, id: @employee
+    get :show, params: { id: @employee }
     assert_response :success
   end
 
   test "should get edit" do
-    get :edit, id: @employee
+    get :edit, params: {id: @employee }
     assert_response :success
   end
 
   test "should update employee" do
-    patch :update, id: @employee, employee: { 
-      dob_dd:       '1', 
-      dob_mm:       '11', 
-      dob_yyyy:     '1981', 
-      joined_dd:    '3', 
-      joined_mm:    'oct', 
-      joined_yyyy:  '2015', 
-      name:         'Ioannis Kole' }
+    patch :update, params: {id: @employee, employee: {
+      dob_dd:       '1',
+      dob_mm:       '11',
+      dob_yyyy:     '1981',
+      joined_dd:    '3',
+      joined_mm:    'oct',
+      joined_yyyy:  '2015',
+      name:         'Ioannis Kole' } }
     assert_redirected_to employee_path(assigns(:employee))
     e = Employee.find @employee.id
     assert_equal Date.new(1981, 11, 1), e.dob
@@ -64,14 +64,14 @@ class EmployeesControllerTest < ActionController::TestCase
 
   test "should destroy employee" do
     assert_difference('Employee.count', -1) do
-      delete :destroy, id: @employee
+      delete :destroy, params: {id: @employee }
     end
 
     assert_redirected_to employees_path
   end
 
   test "should render gov_uk_date_fields" do
-    get :edit, id: @employee
+    get :edit, params: { id: @employee }
 
     assert_select 'input#employee_dob_dd' do
       assert_select '[placeholder]',true
