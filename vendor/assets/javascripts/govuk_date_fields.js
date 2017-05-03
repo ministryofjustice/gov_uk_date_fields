@@ -12,7 +12,7 @@
           //Show Today Button if js is enabled
           $todayButton.addClass('js-enabled');
 
-          $todayButton.on('click', function(e) {
+          $todayButton.on('click', function(event) {
             //Set date and remove inputs from natural tab order
             event.preventDefault();
             setTodayDate($currentGroup, $inputs, $todayButton);
