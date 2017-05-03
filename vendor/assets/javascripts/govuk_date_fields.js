@@ -34,14 +34,15 @@
         var month = d.getUTCMonth() + 1;
         var year = d.getUTCFullYear();
 
-        if(month < 10 ){
-          month = '0' + month;
-        }
-
         //Set the input fields
-        $dateField.val(day);
-        $monthField.val(month);
+        $dateField.val(leadingZero(day));
+        $monthField.val(leadingZero(month));
         $yearField.val(year);
+      },
+
+      leadingZero = function (dateValue){
+        var paddedValue = '00' + dateValue;
+        return paddedValue.substr(paddedValue.length-2);
       };
 
     return {
