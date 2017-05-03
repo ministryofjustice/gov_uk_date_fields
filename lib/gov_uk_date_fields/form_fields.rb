@@ -110,16 +110,8 @@ module GovUkDateFields
       result
     end
 
-    def generate_day_value
-      %Q|value="#{@day_value}"|
-    end
-
-    def generate_month_value
-      %Q|value="#{@month_value}"|
-    end
-
-    def generate_year_value
-      %Q|value="#{@year_value}"|
+    def generate_field_value (field_value)
+      %Q|value="#{field_value}"|
     end
 
     def generate_input_fields
@@ -154,7 +146,7 @@ module GovUkDateFields
       %Q|
           <div class="form-group form-group-day">
             <label for="#{html_id(:day)}">Day</label>
-            <input class="form-control" id="#{html_id(:day)}" name="#{html_name(:day)}" type="number" min="0" max="31" aria-describedby="#{@hint_id}" #{generate_day_value}>
+            <input class="form-control" id="#{html_id(:day)}" name="#{html_name(:day)}" type="number" min="0" max="31" aria-describedby="#{@hint_id}" #{generate_field_value(day_value)}>
           </div>
       |
     end
@@ -163,7 +155,7 @@ module GovUkDateFields
       %Q|
         <div class="form-group form-group-month">
           <label for="#{html_id(:month)}">Month</label>
-          <input class="form-control" id="#{html_id(:month)}" name="#{html_name(:month)}" type="number" min="0" max="12" #{generate_month_value}>
+          <input class="form-control" id="#{html_id(:month)}" name="#{html_name(:month)}" type="number" min="0" max="12" #{generate_field_value(month_value)}>
         </div>
       |
     end
@@ -172,7 +164,7 @@ module GovUkDateFields
       %Q|
         <div class="form-group form-group-year">
           <label for="#{html_id(:year)}">Year</label>
-          <input class="form-control" id="#{html_id(:year)}" name="#{html_name(:year)}" type="number" min="0" max="2100" #{generate_year_value}>
+          <input class="form-control" id="#{html_id(:year)}" name="#{html_name(:year)}" type="number" min="0" max="2100" #{generate_field_value(year_value)}>
         </div>
       |
     end
