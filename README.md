@@ -18,9 +18,9 @@ that these must be defined on the database as ```date``` fields, not ```datetime
 
 Add the following line to your Gemfile:
 
-    gem 'gov_uk_date_fields', '~> 1.0.0'
+    gem 'gov_uk_date_fields', '~> 2.0', '>= 2.0.3'
 
-Then run bundle install.
+Then run `bundle install`. (Note: version 2+ requires Rails 5+, see [gov_uk_date_fields](https://rubygems.org/gems/https://rubygems.org/gems/gov_uk_date_fields/versions) on Rubygems for previous versions.)
 
 
 ### 2. Get your app to load the GovUkDateFields assets
