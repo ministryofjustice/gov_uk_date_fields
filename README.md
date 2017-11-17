@@ -3,8 +3,13 @@
 
 ## Overview
 
-The GOV.UK standard for date fields on web forms is to use three boxes - one each for day, month and year, rather 
-than the drop_down boxes that comes as standard on rails projects.  This gem provides the methods required to 
+The GOV.UK standard for [date fields](https://govuk-elements.herokuapp.com/form-elements/example-date/) on 
+web forms is to use three boxes - one each for day, month and year, rather 
+than the drop_down boxes that comes as standard on rails projects. This is because research has shown that 
+[some users find it difficult to use dropdown lists](https://paper.dropbox.com/doc/Date-picker-vPs1AAOz3bXLm7P3rCrJm) 
+and scrolling through a long list of years (eg for date of birth) can be slower than entering 4 digits using the keyboard.
+
+This gem provides the methods required to 
 easily display and validate dates entered into forms in this way.
 
 
