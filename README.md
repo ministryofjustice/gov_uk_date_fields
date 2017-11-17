@@ -42,6 +42,7 @@ Add the following line to the file ```app/assets/javascripts/application.js```
 
     //= require govuk_date_fields
 
+Note: the javascript is optional (required only for the 'Today' button), and requires jQuery.
 
 ### 3. Tell your models attributes are gov_uk_dates
 
