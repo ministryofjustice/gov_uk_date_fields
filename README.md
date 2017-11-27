@@ -23,7 +23,7 @@ that these must be defined on the database as ```date``` fields, not ```datetime
 
 Add the following line to your Gemfile:
 
-    gem 'gov_uk_date_fields', '~> 1.0.0'
+    gem 'gov_uk_date_fields', '~> 2.1.0'
 
 Then run bundle install.
 
