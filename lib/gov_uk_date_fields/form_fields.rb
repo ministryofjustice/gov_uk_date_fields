@@ -21,9 +21,9 @@ module GovUkDateFields
       @object_name        = object_name
       @attribute          = attribute
       @options            = options
-      @day_value          = @object.send("#{@attribute}_dd")
-      @month_value        = @object.send("#{@attribute}_mm")
-      @year_value         = @object.send("#{@attribute}_yyyy")
+      @day_value          = @object.send("#{@attribute}_dd").gsub(/\D/, '')
+      @month_value        = @object.send("#{@attribute}_mm").gsub(/\D/, '')
+      @year_value         = @object.send("#{@attribute}_yyyy").gsub(/\D/, '')
       @form_hint_text     = @options[:form_hint_text] || "For example, 31 3 1980"
       @fieldset_required  = false
       @fieldset_id        = @options[:id]
@@ -142,7 +142,7 @@ module GovUkDateFields
       %Q|
           <div class="form-group form-group-day">
             <label for="#{html_id(:day)}">Day</label>
-            <input class="form-control" id="#{html_id(:day)}" name="#{html_name(:day)}" type="number" min="0" max="31" aria-describedby="#{@hint_id}" value="#{day_value}">
+            <input class="form-control" id="#{html_id(:day)}" name="#{html_name(:day)}" type="number" min="0" max="31" aria-describedby="#{@hint_id}" value="#{(day_value)}">
           </div>
       |
     end
