@@ -142,7 +142,7 @@ module GovUkDateFields
       %Q|
           <div class="form-group form-group-day">
             <label for="#{html_id(:day)}">Day</label>
-            <input class="form-control" id="#{html_id(:day)}" name="#{html_name(:day)}" type="number" min="0" max="31" aria-describedby="#{@hint_id}" value="#{(day_value)}">
+            <input class="form-control" id="#{html_id(:day)}" name="#{html_name(:day)}" type="number" min="0" max="31" aria-describedby="#{@hint_id}" value="#{day_value}">
           </div>
       |
     end
