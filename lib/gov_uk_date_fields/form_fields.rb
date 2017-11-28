@@ -21,9 +21,9 @@ module GovUkDateFields
       @object_name        = object_name
       @attribute          = attribute
       @options            = options
-      @day_value          = @object.send("#{@attribute}_dd").gsub(/\D/, '')
-      @month_value        = @object.send("#{@attribute}_mm").gsub(/\D/, '')
-      @year_value         = @object.send("#{@attribute}_yyyy").gsub(/\D/, '')
+      @day_value          = @object.send("#{@attribute}_dd")&.gsub(/\D/, '')
+      @month_value        = @object.send("#{@attribute}_mm")&.gsub(/\D/, '')
+      @year_value         = @object.send("#{@attribute}_yyyy")&.gsub(/\D/, '')
       @form_hint_text     = @options[:form_hint_text] || "For example, 31 3 1980"
       @fieldset_required  = false
       @fieldset_id        = @options[:id]
