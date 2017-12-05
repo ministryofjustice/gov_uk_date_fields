@@ -25,8 +25,7 @@ Add the following line to your Gemfile:
 
     gem 'gov_uk_date_fields', '~> 2.1.1'
 
-Then run bundle install.  (Note: version 2+ requires Rails 5+, see [gov_uk_date_fields]
-(https://rubygems.org/gems/https://rubygems.org/gems/gov_uk_date_fields/versions) on Rubygems for previous versions.)
+Then run bundle install.  (Note: version 2+ requires Rails 5+, see [gov_uk_date_fields](https://rubygems.org/gems/https://rubygems.org/gems/gov_uk_date_fields/versions) on Rubygems for previous versions.)
 
 
 ### 2. Get your app to load the GovUkDateFields assets
