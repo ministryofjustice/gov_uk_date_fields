@@ -13,6 +13,8 @@ gemspec
 # To use a debugger
 # gem 'byebug', group: [:development, :test]
 group :test, :development do
+  gem 'pry'
+  gem 'pry-byebug'
   gem 'minitest-reporters', '~> 1.1', '>= 1.1.7'
   gem 'pg', '~> 0.18.4'
   gem 'awesome_print', '~> 1.6'

@@ -64,32 +64,28 @@ module GovUkDateFields
         #
         date_fields.each do |field|
 
-          # #dob -return @_dob.date
-          define_method(field) do
-            return self.instance_variable_get("@_#{field}".to_sym).date
-          end
-
           # #dob=(date) = assigns a date to the GovukDateFields::FormDate object
           define_method("#{field}=") do |new_date|
             raise ArgumentError.new("#{new_date} is not a Date object") unless new_date.respond_to?(:to_date) || new_date.nil?
             new_date = new_date.to_date unless new_date.nil?
             GovUkDateFields::FormDate.set_from_date(self, field, new_date)
+            super(new_date)
           end
 
           # #dob_dd   - return the day value for form population
           define_method("#{field}_dd") do
             return self.instance_variable_get("@_#{field}".to_sym).dd
-          end       
+          end
 
           # #dob_mm   - return the day value for form population
           define_method("#{field}_mm") do
             return self.instance_variable_get("@_#{field}".to_sym).mm
-          end    
+          end
 
           # #dob_yyyy   - return the day value for form population
           define_method("#{field}_yyyy") do
             return self.instance_variable_get("@_#{field}".to_sym).yyyy
-          end  
+          end
 
           # #dob_dd= - set the day part of the date (used in population of model from form)
           define_method("#{field}_dd=") do |day| 

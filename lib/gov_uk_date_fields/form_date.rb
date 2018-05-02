@@ -25,18 +25,18 @@ module GovUkDateFields
       else
         form_date = new(date.day.to_s, date.month.to_s, date.year.to_s, date)
       end
-      update_object(object, attr_name, form_date)
+      object.instance_variable_set("@_#{attr_name}", form_date)
     end
 
 
-    
+
     def self.set_date_part(date_part, object, attr_name, value)
       form_date = object.instance_variable_get("@_#{attr_name}".to_sym) || FormDate.nil_date
       form_date.send("#{date_part}=", value)
       form_date.create_date_from_date_parts
-      FormDate.update_object(object, attr_name, form_date)
+      object.__send__("#{attr_name}=", form_date.date)
+      object.instance_variable_set("@_#{attr_name}", form_date)
     end
-
 
     def self.nil_date
       new('', '', '')
@@ -87,14 +87,6 @@ module GovUkDateFields
       @mm = @temp[:mm]
       @yyyy = @temp[:yyyy]
     end
-
-    
-
-    def self.update_object(object, attr_name, form_date)
-      object.instance_variable_set("@_#{attr_name}".to_sym, form_date)
-      object[attr_name] = form_date.date
-    end
-
 
     def self.attr_not_present_in_params?(attr_name, params)
       attr_missing_in_params?(attr_name, params)  || all_blanks_in_params?(attr_name, params)
