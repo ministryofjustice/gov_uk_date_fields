@@ -38,18 +38,6 @@ module GovUkDateFields
           end
         end
 
-
-        # This is an after initialize method.  We want to populate every gov_uk_date_field, unless it's a new
-        # record, and there is already a non-nil form date (this happens when you call new and pass a hash of attributes and values)
-        define_method(:populate_gov_uk_dates) do
-          self._gov_uk_dates.each do |date_field|
-            next if self.new_record? && self.instance_variable_get("@_#{date_field}".to_sym) != nil
-            GovUkDateFields::FormDate.set_from_date(self, date_field, self[date_field])
-          end
-        end
-
-
-
         # For each of the gov uk date fields, we have to define the following 
         # instance methods (assuming the date field name is dob):
         #
@@ -108,8 +96,6 @@ module GovUkDateFields
 
         end
 
-        after_initialize :populate_gov_uk_dates
-
         include GovUkDateFields::ActsAsGovUkDate::LocalInstanceMethods
       end
 
@@ -128,15 +114,17 @@ module GovUkDateFields
     end
 
     module LocalInstanceMethods
+      # This is an after initialize method.  We want to populate every gov_uk_date_field, unless it's a new
+      # record, and there is already a non-nil form date (this happens when you call new and pass a hash of attributes and values)
       def populate_gov_uk_dates
         self._gov_uk_dates.each do |field_name|
+          instance_variable_name = "@_#{field_name}"
+          next if self.new_record? &&
+                  self.instance_variable_defined?(instance_variable_name) &&
+                  self.instance_variable_get(instance_variable_name) != nil
           GovUkDateFields::FormDate.set_from_date(self, field_name, self[field_name])
         end
       end
-
-      # def populate_gov_uk_dates_from_form_fields
-      #   MojDateFields::FormDate.set_from_date(self, :first_day_of_trial, self['first_day_of_trial'])
-      # end
     end
   end
 end
