@@ -163,6 +163,22 @@ invalid in the model's errors hash during the validation cycle, and the entered 
 the user on the form.
 
 
+## Developing
+
+### Testing
+
+Run tests either with the rake task:
+
+    bundle exec rake test
+
+Or run test files directly from the command-line:
+
+    bundle exec ruby -I. test/dummy/test/models/form_date_test.rb
+
+    # You can run with on a specific test by name
+    bundle exec ruby -I. test/dummy/test/models/employee_test.rb -n test_creating_a_new_employee_with_invalid_dates_is_invalid
+
+
 ## FAQs
 
 ### What is the HTML that this gem produces?

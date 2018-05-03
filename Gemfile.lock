@@ -48,6 +48,8 @@ GEM
     arel (7.1.4)
     awesome_print (1.7.0)
     builder (3.2.3)
+    byebug (10.0.2)
+    coderay (1.1.2)
     concurrent-ruby (1.0.5)
     erubis (2.7.0)
     globalid (0.4.0)
@@ -75,6 +77,12 @@ GEM
     nokogiri (1.7.1)
       mini_portile2 (~> 2.1.0)
     pg (0.18.4)
+    pry (0.11.0)
+      coderay (~> 1.1.0)
+      method_source (~> 0.8.1)
+    pry-byebug (3.6.0)
+      byebug (~> 10.0)
+      pry (~> 0.10)
     rack (2.0.1)
     rack-test (0.6.3)
       rack (>= 1.0)
@@ -131,6 +139,8 @@ DEPENDENCIES
   minitest-reporters (~> 1.1, >= 1.1.7)
   mocha (~> 1.1)
   pg (~> 0.18.4)
+  pry
+  pry-byebug
   rails-controller-testing (~> 1.0)
 
 BUNDLED WITH
