@@ -103,149 +103,171 @@ class GovUkDateFieldsTest < ActiveSupport::TestCase
 
   def expected_fieldset_output_with_error_class_and_message
     %Q{
-      <fieldset id="employee_date_joined" class="gov_uk_date error">
-        <legend>Joining date</legend>
-        <div class="form-date">
-          <ul>
-            <li>
-              <span class="error-message">Invalid joining date</span>
-            </li>
-            <li>
-              <span class="error-message">Joining date must be in the past</span>
-            </li>
-          </ul>
-          <p class="form-hint" id="employee_date_joined-hint">For example, 31 3 1980</p>
-          <div class="form-group form-group-day">
-            <label for="employee_joined_dd">Day</label>
-            <input class="form-control" id="employee_joined_dd" name="employee[joined_dd]" type="number" min="0" max="31" aria-describedby="employee_date_joined-hint" value="1">
+      <div class="form-group gov_uk_date form-group-error" id="employee_date_joined">
+        <fieldset>
+          <legend>
+            <span class="form-label-bold">Joining date</span>
+            <span class="form-hint" id="employee_date_joined-hint">
+              For example, 31 3 1980
+            </span>
+            <ul>
+              <li><span class="error-message">Invalid joining date</span></li>
+              <li><span class="error-message">Joining date must be in the past</span></li>
+            </ul>
+          </legend>
+          <div class="form-date">
+            <div class="form-group form-group-day">
+              <label for="employee_joined_dd">Day</label>
+              <input class="form-control form-control-error" id="employee_joined_dd" name="employee[joined_dd]" type="number" min="0" max="31" aria-describedby="employee_date_joined-hint" value="1">
+            </div>
+            <div class="form-group form-group-month">
+              <label for="employee_joined_mm">Month</label>
+              <input class="form-control form-control-error" id="employee_joined_mm" name="employee[joined_mm]" type="number" min="0" max="12" value="4">
+            </div>
+            <div class="form-group form-group-year">
+              <label for="employee_joined_yyyy">Year</label>
+              <input class="form-control form-control-error" id="employee_joined_yyyy" name="employee[joined_yyyy]" type="number" min="0" max="2100" value="2015">
+            </div>
           </div>
-          <div class="form-group form-group-month">
-            <label for="employee_joined_mm">Month</label>
-            <input class="form-control" id="employee_joined_mm" name="employee[joined_mm]" type="number" min="0" max="12" value="4">
-          </div>
-          <div class="form-group form-group-year">
-            <label for="employee_joined_yyyy">Year</label>
-            <input class="form-control" id="employee_joined_yyyy" name="employee[joined_yyyy]" type="number" min="0" max="2100" value="2015">
-          </div>
-        </div>
-      </fieldset>
+        </fieldset>
+      </div>
     }
   end
 
   def expected_fieldset_output_with_id
     %Q{
-      <fieldset id="employee_date_joined" class="gov_uk_date">
-        <legend>Joining date</legend>
-        <div class="form-date">
-          <p class="form-hint" id="employee_date_joined-hint">For example, 31 3 1980</p>
-          <div class="form-group form-group-day">
-            <label for="employee_joined_dd">Day</label>
-            <input class="form-control" id="employee_joined_dd" name="employee[joined_dd]" type="number" min="0" max="31" aria-describedby="employee_date_joined-hint" value="1">
+      <div class="form-group gov_uk_date" id="employee_date_joined">
+        <fieldset>
+          <legend>
+            <span class="form-label-bold">Joining date</span>
+            <span class="form-hint" id="employee_date_joined-hint">For example, 31 3 1980</span>
+          </legend>
+          <div class="form-date">
+            <div class="form-group form-group-day">
+              <label for="employee_joined_dd">Day</label>
+              <input class="form-control" id="employee_joined_dd" name="employee[joined_dd]" type="number" min="0" max="31" aria-describedby="employee_date_joined-hint" value="1">
+            </div>
+            <div class="form-group form-group-month">
+              <label for="employee_joined_mm">Month</label>
+              <input class="form-control" id="employee_joined_mm" name="employee[joined_mm]" type="number" min="0" max="12" value="4">
+            </div>
+            <div class="form-group form-group-year">
+              <label for="employee_joined_yyyy">Year</label>
+              <input class="form-control" id="employee_joined_yyyy" name="employee[joined_yyyy]" type="number" min="0" max="2100" value="2015">
+            </div>
           </div>
-          <div class="form-group form-group-month">
-            <label for="employee_joined_mm">Month</label>
-            <input class="form-control" id="employee_joined_mm" name="employee[joined_mm]" type="number" min="0" max="12" value="4">
-          </div>
-          <div class="form-group form-group-year">
-            <label for="employee_joined_yyyy">Year</label>
-            <input class="form-control" id="employee_joined_yyyy" name="employee[joined_yyyy]" type="number" min="0" max="2100" value="2015">
-          </div>
-        </div>
-      </fieldset>
+        </fieldset>
+      </div>
     }
   end
 
   def expected_fieldset_output_with_form_hint
     %Q{
-      <fieldset class="gov_uk_date">
-        <legend class="govuk_legend_class">Date of birth</legend>
-        <div class="form-date">
-          <p class="form-hint" id="dob-hint">In the form: dd mm yyyy</p>
-          <div class="form-group form-group-day">
-            <label for="employee_dob_dd">Day</label>
-            <input class="form-control" id="employee_dob_dd" name="employee[dob_dd]" type="number" min="0" max="31" aria-describedby="dob-hint" value="7">
+      <div class="form-group gov_uk_date">
+        <fieldset>
+          <legend class="govuk_legend_class">
+            <span class="form-label-bold">Date of birth</span>
+            <span class="form-hint" id="dob-hint">In the form: dd mm yyyy</span>
+          </legend>
+          <div class="form-date">
+            <div class="form-group form-group-day">
+              <label for="employee_dob_dd">Day</label>
+              <input class="form-control" id="employee_dob_dd" name="employee[dob_dd]" type="number" min="0" max="31" aria-describedby="dob-hint" value="7">
+            </div>
+            <div class="form-group form-group-month">
+              <label for="employee_dob_mm">Month</label>
+              <input class="form-control" id="employee_dob_mm" name="employee[dob_mm]" type="number" min="0" max="12" value="12">
+            </div>
+            <div class="form-group form-group-year">
+              <label for="employee_dob_yyyy">Year</label>
+              <input class="form-control" id="employee_dob_yyyy" name="employee[dob_yyyy]" type="number" min="0" max="2100" value="1963">
+            </div>
           </div>
-          <div class="form-group form-group-month">
-            <label for="employee_dob_mm">Month</label>
-            <input class="form-control" id="employee_dob_mm" name="employee[dob_mm]" type="number" min="0" max="12" value="12">
-          </div>
-          <div class="form-group form-group-year">
-            <label for="employee_dob_yyyy">Year</label>
-            <input class="form-control" id="employee_dob_yyyy" name="employee[dob_yyyy]" type="number" min="0" max="2100" value="1963">
-          </div>
-        </div>
-      </fieldset>
+        </fieldset>
+      </div>
     }
   end
 
   def expected_fieldset_output_with_legend_class
     %Q{
-      <fieldset class="gov_uk_date">
-        <legend class="date-legend-class">Joining date</legend>
-        <div class="form-date">
-          <p class="form-hint" id="joined-hint">For example, 31 3 1980</p>
-          <div class="form-group form-group-day">
-            <label for="employee_joined_dd">Day</label>
-            <input class="form-control" id="employee_joined_dd" name="employee[joined_dd]" type="number" min="0" max="31" aria-describedby="joined-hint" value="1">
+      <div class="form-group gov_uk_date">
+        <fieldset>
+          <legend class="date-legend-class">
+            <span class="form-label-bold">Joining date</span>
+            <span class="form-hint" id="joined-hint">For example, 31 3 1980</span>
+          </legend>
+          <div class="form-date">
+            <div class="form-group form-group-day">
+              <label for="employee_joined_dd">Day</label>
+              <input class="form-control" id="employee_joined_dd" name="employee[joined_dd]" type="number" min="0" max="31" aria-describedby="joined-hint" value="1">
+            </div>
+            <div class="form-group form-group-month">
+              <label for="employee_joined_mm">Month</label>
+              <input class="form-control" id="employee_joined_mm" name="employee[joined_mm]" type="number" min="0" max="12" value="4">
+            </div>
+            <div class="form-group form-group-year">
+              <label for="employee_joined_yyyy">Year</label>
+              <input class="form-control" id="employee_joined_yyyy" name="employee[joined_yyyy]" type="number" min="0" max="2100" value="2015">
+            </div>
           </div>
-          <div class="form-group form-group-month">
-            <label for="employee_joined_mm">Month</label>
-            <input class="form-control" id="employee_joined_mm" name="employee[joined_mm]" type="number" min="0" max="12" value="4">
-          </div>
-          <div class="form-group form-group-year">
-            <label for="employee_joined_yyyy">Year</label>
-            <input class="form-control" id="employee_joined_yyyy" name="employee[joined_yyyy]" type="number" min="0" max="2100" value="2015">
-          </div>
-        </div>
-      </fieldset>
+        </fieldset>
+      </div>
     }
   end
 
   def expected_fieldset_output_with_unstyled_today_button
     %Q{
-      <fieldset id="employee_date_joined" class="gov_uk_date">
-        <legend>Joining date</legend>
-        <div class="form-date">
-          <p class="form-hint" id="employee_date_joined-hint">For example, 31 3 1980</p>
-          <a class="button" role="button" href="#">Today</a>
-          <div class="form-group form-group-day">
-              <label for="employee_joined_dd">Day</label>
-              <input class="form-control" id="employee_joined_dd" name="employee[joined_dd]" type="number" min="0" max="31" aria-describedby="employee_date_joined-hint" value="1">
+      <div class="form-group gov_uk_date" id="employee_date_joined">
+        <fieldset>
+          <legend>
+            <span class="form-label-bold">Joining date</span>
+            <span class="form-hint" id="employee_date_joined-hint">For example, 31 3 1980</span>
+          </legend>
+          <div class="form-date">
+            <a class="button" role="button" href="#">Today</a>
+            <div class="form-group form-group-day">
+                <label for="employee_joined_dd">Day</label>
+                <input class="form-control" id="employee_joined_dd" name="employee[joined_dd]" type="number" min="0" max="31" aria-describedby="employee_date_joined-hint" value="1">
+            </div>
+            <div class="form-group form-group-month">
+                <label for="employee_joined_mm">Month</label>
+                <input class="form-control" id="employee_joined_mm" name="employee[joined_mm]" type="number" min="0" max="12" value="4">
+            </div>
+            <div class="form-group form-group-year">
+                <label for="employee_joined_yyyy">Year</label>
+                <input class="form-control" id="employee_joined_yyyy" name="employee[joined_yyyy]" type="number" min="0" max="2100" value="2015">
+            </div>
           </div>
-          <div class="form-group form-group-month">
-              <label for="employee_joined_mm">Month</label>
-              <input class="form-control" id="employee_joined_mm" name="employee[joined_mm]" type="number" min="0" max="12" value="4">
-          </div>
-          <div class="form-group form-group-year">
-              <label for="employee_joined_yyyy">Year</label>
-              <input class="form-control" id="employee_joined_yyyy" name="employee[joined_yyyy]" type="number" min="0" max="2100" value="2015">
-          </div>
-        </div>
-      </fieldset>
+        </fieldset>
+      </div>
     }
   end
 
   def expected_fieldset_output_with_syled_today_button
     %Q{
-      <fieldset id="employee_date_joined" class="gov_uk_date">
-        <legend>Joining date</legend>
-        <div class="form-date">
-          <p class="form-hint" id="employee_date_joined-hint">For example, 31 3 1980</p>
-          <a class="today-button-class" role="button" href="#">Today</a>
-          <div class="form-group form-group-day">
-              <label for="employee_joined_dd">Day</label>
-              <input class="form-control" id="employee_joined_dd" name="employee[joined_dd]" type="number" min="0" max="31" aria-describedby="employee_date_joined-hint" value="1">
+      <div class="form-group gov_uk_date" id="employee_date_joined">
+        <fieldset>
+          <legend>
+            <span class="form-label-bold">Joining date</span>
+            <span class="form-hint" id="employee_date_joined-hint">For example, 31 3 1980</span>
+          </legend>
+          <div class="form-date">
+            <a class="today-button-class" role="button" href="#">Today</a>
+            <div class="form-group form-group-day">
+                <label for="employee_joined_dd">Day</label>
+                <input class="form-control" id="employee_joined_dd" name="employee[joined_dd]" type="number" min="0" max="31" aria-describedby="employee_date_joined-hint" value="1">
+            </div>
+            <div class="form-group form-group-month">
+                <label for="employee_joined_mm">Month</label>
+                <input class="form-control" id="employee_joined_mm" name="employee[joined_mm]" type="number" min="0" max="12" value="4">
+            </div>
+            <div class="form-group form-group-year">
+                <label for="employee_joined_yyyy">Year</label>
+                <input class="form-control" id="employee_joined_yyyy" name="employee[joined_yyyy]" type="number" min="0" max="2100" value="2015">
+            </div>
           </div>
-          <div class="form-group form-group-month">
-              <label for="employee_joined_mm">Month</label>
-              <input class="form-control" id="employee_joined_mm" name="employee[joined_mm]" type="number" min="0" max="12" value="4">
-          </div>
-          <div class="form-group form-group-year">
-              <label for="employee_joined_yyyy">Year</label>
-              <input class="form-control" id="employee_joined_yyyy" name="employee[joined_yyyy]" type="number" min="0" max="2100" value="2015">
-          </div>
-        </div>
-      </fieldset>
+        </fieldset>
+      </div>
     }
   end
 

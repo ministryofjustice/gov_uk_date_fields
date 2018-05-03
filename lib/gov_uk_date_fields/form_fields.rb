@@ -66,25 +66,30 @@ module GovUkDateFields
     def generate_start_fieldset
       %Q|
         #{generate_fieldset_tag}
-          #{generate_legend_tag}#{@options[:legend_text]}</legend>
-          <div class="form-date">
+          #{generate_legend_tag}
+            <span class="form-label-bold">#{@options[:legend_text]}</span>
+            <span class="form-hint" id="#{@hint_id}">#{@form_hint_text}</span>
             #{generate_error_message}
-            <p class="form-hint" id="#{@hint_id}">#{@form_hint_text}</p>
+          </legend>
+          <div class="form-date">
       |
     end
 
     def generate_fieldset_tag
-      result = "<fieldset"
+      css_class = "form-group gov_uk_date"
+      css_class += " form-group-error" if error_for_attr?
+
+      result = %Q|
+                <div class="#{css_class}"|
       result += %Q| id="#{@fieldset_id}"| unless  @fieldset_id.nil?
-      css_class = "gov_uk_date"
-      css_class += " error" if error_for_attr?
-      result += %Q| class="#{css_class}"|
+      result += ">"
+      result += %Q| <fieldset|
       result += ">"
       result
     end
 
     def generate_end_fieldset
-      "</div></fieldset>"
+      "</div></fieldset></div>"
     end
 
     def generate_legend_tag
@@ -139,28 +144,37 @@ module GovUkDateFields
     end
 
     def generate_day_input_field(day_value)
-      %Q|
+      css_class = "form-control"
+      css_class += " form-control-error" if error_for_attr?
+
+      result = %Q|
           <div class="form-group form-group-day">
             <label for="#{html_id(:day)}">Day</label>
-            <input class="form-control" id="#{html_id(:day)}" name="#{html_name(:day)}" type="number" min="0" max="31" aria-describedby="#{@hint_id}" value="#{day_value}">
+            <input class="#{css_class}" id="#{html_id(:day)}" name="#{html_name(:day)}" type="number" min="0" max="31" aria-describedby="#{@hint_id}" value="#{day_value}">
           </div>
       |
     end
 
     def generate_month_input_field(month_value)
-      %Q|
+      css_class = "form-control"
+      css_class += " form-control-error" if error_for_attr?
+
+      result = %Q|
         <div class="form-group form-group-month">
           <label for="#{html_id(:month)}">Month</label>
-          <input class="form-control" id="#{html_id(:month)}" name="#{html_name(:month)}" type="number" min="0" max="12" value="#{month_value}">
+          <input class="#{css_class}" id="#{html_id(:month)}" name="#{html_name(:month)}" type="number" min="0" max="12" value="#{month_value}">
         </div>
       |
     end
 
     def generate_year_input_field(year_value)
-      %Q|
+      css_class = "form-control"
+      css_class += " form-control-error" if error_for_attr?
+
+      result = %Q|
         <div class="form-group form-group-year">
           <label for="#{html_id(:year)}">Year</label>
-          <input class="form-control" id="#{html_id(:year)}" name="#{html_name(:year)}" type="number" min="0" max="2100" value="#{year_value}">
+          <input class="#{css_class}" id="#{html_id(:year)}" name="#{html_name(:year)}" type="number" min="0" max="2100" value="#{year_value}">
         </div>
       |
     end
