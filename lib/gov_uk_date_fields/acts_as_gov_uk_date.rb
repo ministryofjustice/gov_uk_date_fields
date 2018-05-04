@@ -6,8 +6,15 @@ module GovUkDateFields
     end
 
     module ClassMethods
-      VALID_ERROR_CLASH_BEHAVIOUR_OPTIONS = [ :append_gov_uk_date_field_error, :omit_gov_uk_date_field_error, :override_with_gov_uk_date_field_error]
-      DEFAULT_GOV_UK_DATE_OPTIONS = { validate_if: ->{ true }, error_clash_behaviour: VALID_ERROR_CLASH_BEHAVIOUR_OPTIONS.first }.freeze
+      VALID_ERROR_CLASH_BEHAVIOUR_OPTIONS = [
+        :append_gov_uk_date_field_error,
+        :omit_gov_uk_date_field_error,
+        :override_with_gov_uk_date_field_error
+      ]
+      DEFAULT_GOV_UK_DATE_OPTIONS = {
+        error_clash_behaviour: VALID_ERROR_CLASH_BEHAVIOUR_OPTIONS.first,
+        validate_if: -> { true },
+      }.freeze
 
       def acts_as_gov_uk_date(*date_fields)
         options = _extract_supported_options!(date_fields)
@@ -57,7 +64,11 @@ module GovUkDateFields
             raise ArgumentError.new("#{new_date} is not a Date object") unless new_date.respond_to?(:to_date) || new_date.nil?
             new_date = new_date.to_date unless new_date.nil?
             GovUkDateFields::FormDate.set_from_date(self, field, new_date)
-            super(new_date)
+            # if defined?(super)
+              super(new_date)
+            # else
+            #   write_attribute(field, new_date)
+            # end
           end
 
           # #dob_dd   - return the day value for form population
@@ -98,7 +109,7 @@ module GovUkDateFields
       protected
 
       def _supported_options
-        [:validate_if, :error_clash_behaviour]
+        [:error_clash_behaviour, :validate_if]
       end
 
       def _extract_supported_options!(args)
