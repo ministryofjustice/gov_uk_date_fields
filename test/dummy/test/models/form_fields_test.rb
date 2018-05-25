@@ -118,15 +118,15 @@ class GovUkDateFieldsTest < ActiveSupport::TestCase
           <div class="form-date">
             <div class="form-group form-group-day">
               <label for="employee_joined_dd">Day</label>
-              <input class="form-control form-control-error" id="employee_joined_dd" name="employee[joined_dd]" type="number" min="0" max="31" aria-describedby="employee_date_joined-hint" value="1">
+              <input class="form-control form-control-error" id="employee_joined_dd" name="employee[joined_dd]" type="number" pattern="\\d*" min="0" max="31" aria-describedby="employee_date_joined-hint" value="1">
             </div>
             <div class="form-group form-group-month">
               <label for="employee_joined_mm">Month</label>
-              <input class="form-control form-control-error" id="employee_joined_mm" name="employee[joined_mm]" type="number" min="0" max="12" value="4">
+              <input class="form-control form-control-error" id="employee_joined_mm" name="employee[joined_mm]" type="number" pattern="\\d*" min="0" max="12" value="4">
             </div>
             <div class="form-group form-group-year">
               <label for="employee_joined_yyyy">Year</label>
-              <input class="form-control form-control-error" id="employee_joined_yyyy" name="employee[joined_yyyy]" type="number" min="0" max="2100" value="2015">
+              <input class="form-control form-control-error" id="employee_joined_yyyy" name="employee[joined_yyyy]" type="number" pattern="\\d*" min="0" max="2100" value="2015">
             </div>
           </div>
         </fieldset>
@@ -145,15 +145,15 @@ class GovUkDateFieldsTest < ActiveSupport::TestCase
           <div class="form-date">
             <div class="form-group form-group-day">
               <label for="employee_joined_dd">Day</label>
-              <input class="form-control" id="employee_joined_dd" name="employee[joined_dd]" type="number" min="0" max="31" aria-describedby="employee_date_joined-hint" value="1">
+              <input class="form-control" id="employee_joined_dd" name="employee[joined_dd]" type="number" pattern="\\d*" min="0" max="31" aria-describedby="employee_date_joined-hint" value="1">
             </div>
             <div class="form-group form-group-month">
               <label for="employee_joined_mm">Month</label>
-              <input class="form-control" id="employee_joined_mm" name="employee[joined_mm]" type="number" min="0" max="12" value="4">
+              <input class="form-control" id="employee_joined_mm" name="employee[joined_mm]" type="number" pattern="\\d*" min="0" max="12" value="4">
             </div>
             <div class="form-group form-group-year">
               <label for="employee_joined_yyyy">Year</label>
-              <input class="form-control" id="employee_joined_yyyy" name="employee[joined_yyyy]" type="number" min="0" max="2100" value="2015">
+              <input class="form-control" id="employee_joined_yyyy" name="employee[joined_yyyy]" type="number" pattern="\\d*" min="0" max="2100" value="2015">
             </div>
           </div>
         </fieldset>
@@ -172,15 +172,15 @@ class GovUkDateFieldsTest < ActiveSupport::TestCase
           <div class="form-date">
             <div class="form-group form-group-day">
               <label for="employee_dob_dd">Day</label>
-              <input class="form-control" id="employee_dob_dd" name="employee[dob_dd]" type="number" min="0" max="31" aria-describedby="dob-hint" value="7">
+              <input class="form-control" id="employee_dob_dd" name="employee[dob_dd]" type="number" pattern="\\d*" min="0" max="31" aria-describedby="dob-hint" value="7">
             </div>
             <div class="form-group form-group-month">
               <label for="employee_dob_mm">Month</label>
-              <input class="form-control" id="employee_dob_mm" name="employee[dob_mm]" type="number" min="0" max="12" value="12">
+              <input class="form-control" id="employee_dob_mm" name="employee[dob_mm]" type="number" pattern="\\d*" min="0" max="12" value="12">
             </div>
             <div class="form-group form-group-year">
               <label for="employee_dob_yyyy">Year</label>
-              <input class="form-control" id="employee_dob_yyyy" name="employee[dob_yyyy]" type="number" min="0" max="2100" value="1963">
+              <input class="form-control" id="employee_dob_yyyy" name="employee[dob_yyyy]" type="number" pattern="\\d*" min="0" max="2100" value="1963">
             </div>
           </div>
         </fieldset>
@@ -199,15 +199,15 @@ class GovUkDateFieldsTest < ActiveSupport::TestCase
           <div class="form-date">
             <div class="form-group form-group-day">
               <label for="employee_joined_dd">Day</label>
-              <input class="form-control" id="employee_joined_dd" name="employee[joined_dd]" type="number" min="0" max="31" aria-describedby="joined-hint" value="1">
+              <input class="form-control" id="employee_joined_dd" name="employee[joined_dd]" type="number" pattern="\\d*" min="0" max="31" aria-describedby="joined-hint" value="1">
             </div>
             <div class="form-group form-group-month">
               <label for="employee_joined_mm">Month</label>
-              <input class="form-control" id="employee_joined_mm" name="employee[joined_mm]" type="number" min="0" max="12" value="4">
+              <input class="form-control" id="employee_joined_mm" name="employee[joined_mm]" type="number" pattern="\\d*" min="0" max="12" value="4">
             </div>
             <div class="form-group form-group-year">
               <label for="employee_joined_yyyy">Year</label>
-              <input class="form-control" id="employee_joined_yyyy" name="employee[joined_yyyy]" type="number" min="0" max="2100" value="2015">
+              <input class="form-control" id="employee_joined_yyyy" name="employee[joined_yyyy]" type="number" pattern="\\d*" min="0" max="2100" value="2015">
             </div>
           </div>
         </fieldset>
@@ -227,15 +227,15 @@ class GovUkDateFieldsTest < ActiveSupport::TestCase
             <a class="button" role="button" href="#">Today</a>
             <div class="form-group form-group-day">
                 <label for="employee_joined_dd">Day</label>
-                <input class="form-control" id="employee_joined_dd" name="employee[joined_dd]" type="number" min="0" max="31" aria-describedby="employee_date_joined-hint" value="1">
+                <input class="form-control" id="employee_joined_dd" name="employee[joined_dd]" type="number" pattern="\\d*" min="0" max="31" aria-describedby="employee_date_joined-hint" value="1">
             </div>
             <div class="form-group form-group-month">
                 <label for="employee_joined_mm">Month</label>
-                <input class="form-control" id="employee_joined_mm" name="employee[joined_mm]" type="number" min="0" max="12" value="4">
+                <input class="form-control" id="employee_joined_mm" name="employee[joined_mm]" type="number" pattern="\\d*" min="0" max="12" value="4">
             </div>
             <div class="form-group form-group-year">
                 <label for="employee_joined_yyyy">Year</label>
-                <input class="form-control" id="employee_joined_yyyy" name="employee[joined_yyyy]" type="number" min="0" max="2100" value="2015">
+                <input class="form-control" id="employee_joined_yyyy" name="employee[joined_yyyy]" type="number" pattern="\\d*" min="0" max="2100" value="2015">
             </div>
           </div>
         </fieldset>
@@ -255,15 +255,15 @@ class GovUkDateFieldsTest < ActiveSupport::TestCase
             <a class="today-button-class" role="button" href="#">Today</a>
             <div class="form-group form-group-day">
                 <label for="employee_joined_dd">Day</label>
-                <input class="form-control" id="employee_joined_dd" name="employee[joined_dd]" type="number" min="0" max="31" aria-describedby="employee_date_joined-hint" value="1">
+                <input class="form-control" id="employee_joined_dd" name="employee[joined_dd]" type="number" pattern="\\d*" min="0" max="31" aria-describedby="employee_date_joined-hint" value="1">
             </div>
             <div class="form-group form-group-month">
                 <label for="employee_joined_mm">Month</label>
-                <input class="form-control" id="employee_joined_mm" name="employee[joined_mm]" type="number" min="0" max="12" value="4">
+                <input class="form-control" id="employee_joined_mm" name="employee[joined_mm]" type="number" pattern="\\d*" min="0" max="12" value="4">
             </div>
             <div class="form-group form-group-year">
                 <label for="employee_joined_yyyy">Year</label>
-                <input class="form-control" id="employee_joined_yyyy" name="employee[joined_yyyy]" type="number" min="0" max="2100" value="2015">
+                <input class="form-control" id="employee_joined_yyyy" name="employee[joined_yyyy]" type="number" pattern="\\d*" min="0" max="2100" value="2015">
             </div>
           </div>
         </fieldset>
