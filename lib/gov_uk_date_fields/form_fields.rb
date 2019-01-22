@@ -28,7 +28,7 @@ module GovUkDateFields
       @fieldset_required  = false
       @fieldset_id        = @options[:id]
       @error_messages     = @options[:error_messages]
-      @hint_id            = @fieldset_id.nil? ? "#{@attribute}-hint" : "#{@fieldset_id}-hint"
+      @hint_id            = form_group_hint_id
       @today_button       = @options[:today_button] || false
       parse_options
     end
@@ -81,7 +81,7 @@ module GovUkDateFields
 
       result = %Q|
                 <div class="#{css_class}"|
-      result += %Q| id="#{@fieldset_id}"| unless  @fieldset_id.nil?
+      result += %Q| id="#{form_group_id}"|
       result += ">"
       result += %Q| <fieldset|
       result += ">"
@@ -217,6 +217,26 @@ module GovUkDateFields
 
     def brackets2underscore(string)
       string.tr('[','_').tr(']', '_').gsub('__', '_').gsub(/_$/, '')
+    end
+
+    def attribute_prefix
+      brackets2underscore(@object_name.to_s)
+    end
+
+    def form_group_id
+      # If an `id` option was passed, this takes precedence, to ensure backward compatibility
+      return @fieldset_id if @fieldset_id
+
+      group_id = [attribute_prefix, @attribute]
+      group_id.unshift('error') if error_for_attr?
+      group_id.join('_')
+    end
+
+    def form_group_hint_id
+      # If an `id` option was passed, this takes precedence, to ensure backward compatibility
+      return "#{@fieldset_id}-hint" if @fieldset_id
+
+      [attribute_prefix, @attribute].join('_') + '-hint'
     end
 
     def field_options(value, id, name, placeholder, size)
