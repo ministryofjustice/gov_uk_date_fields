@@ -12,7 +12,7 @@ class OmitErrorClashEmployeeTest < ActiveSupport::TestCase
 
   def test_presence_error_messages_generated
     @employee.valid?
-    assert_equal ["can't be blank"], @employee.errors[:dob]
+    assert_equal ["Enter the date of birth"], @employee.errors[:dob]
     assert_equal ["can't be blank"], @employee.errors[:joined]
   end
 
@@ -20,7 +20,7 @@ class OmitErrorClashEmployeeTest < ActiveSupport::TestCase
     @employee.dob_dd = '32'
     @employee.joined_mm = '77'
     assert_false @employee.valid?
-    assert_equal ["can't be blank"], @employee.errors[:dob]
+    assert_equal ["Enter the date of birth"], @employee.errors[:dob]
     assert_equal ["can't be blank"], @employee.errors[:joined]
   end
 

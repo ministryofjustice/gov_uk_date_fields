@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    gov_uk_date_fields (3.1.0)
+    gov_uk_date_fields (4.0.0)
       rails (>= 5.0)
 
 GEM
@@ -145,4 +145,4 @@ DEPENDENCIES
   rails-controller-testing (~> 1.0)
 
 BUNDLED WITH
-   1.16.0
+   1.17.3

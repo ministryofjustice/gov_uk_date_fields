@@ -74,13 +74,8 @@ class EmployeesControllerTest < ActionController::TestCase
     get :edit, params: { id: @employee }
 
     assert_select 'input#employee_dob_dd' do
-      assert_select '[placeholder]',true
-      assert_select '[placeholder=?]','DD'
-      assert_select '[size=?]','2'
-    end
-
-    assert_select 'input#employee_joined_dd' do
-      assert_select '[placeholder]',false
+      assert_select '[type=?]','number'
+      assert_select '[pattern=?]','[0-9]*'
     end
   end
 end

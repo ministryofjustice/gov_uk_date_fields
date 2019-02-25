@@ -16,8 +16,8 @@ Gem::Specification.new do |s|
                   "and a form_builder method gov_uk_date_field to display those fields."
   s.license     = "MIT"
 
-  s.files = Dir["vendor/assets/**/*", "lib/**/*", "MIT-LICENSE", "Rakefile", "README.rdoc"]
-  s.require_paths = ["lib", "vendor"]
+  s.files = Dir["lib/**/*", "MIT-LICENSE", "Rakefile", "README.rdoc"]
+  s.require_paths = ["lib"]
   s.test_files = Dir["test/**/*"]
 
   s.add_dependency 'rails', '>= 5.0'

@@ -20,4 +20,21 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  errors:
+    format: "%{message}"
+    attributes:
+      dob:
+        blank: Enter the date of birth
+
+  helpers:
+    fieldset:
+      employee:
+        dob: Date of birth
+    label:
+      dob:
+        day: Day
+        month: Month
+        year: Year
+    hint:
+      employee:
+        dob: For example, 12 11 2007

@@ -1,0 +1,34 @@
+<div class="govuk-form-group">
+    <fieldset class="govuk-fieldset" role="group" aria-describedby="employee_dob_hint">
+        <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl govuk-visually-hidden">
+            Date of birth
+        </legend>
+        <span class="govuk-hint" id="employee_dob_hint">For example, 12 11 2007</span>
+        <div class="govuk-date-input" id="employee_dob">
+            <div class="govuk-date-input__item">
+                <div class="govuk-form-group">
+                    <label class="govuk-label govuk-date-input__label" for="employee_dob_dd">
+                        Day
+                    </label>
+                    <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="employee_dob_dd" name="employee[dob_dd]" value="7" type="number" pattern="[0-9]*">
+                </div>
+            </div>
+            <div class="govuk-date-input__item">
+                <div class="govuk-form-group">
+                    <label class="govuk-label govuk-date-input__label" for="employee_dob_mm">
+                        Month
+                    </label>
+                    <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="employee_dob_mm" name="employee[dob_mm]" value="12" type="number" pattern="[0-9]*">
+                </div>
+            </div>
+            <div class="govuk-date-input__item">
+                <div class="govuk-form-group">
+                    <label class="govuk-label govuk-date-input__label" for="employee_dob_yyyy">
+                        Year
+                    </label>
+                    <input class="govuk-input govuk-date-input__input govuk-input--width-4" id="employee_dob_yyyy" name="employee[dob_yyyy]" value="1963" type="number" pattern="[0-9]*">
+                </div>
+            </div>
+        </div>
+    </fieldset>
+</div>
