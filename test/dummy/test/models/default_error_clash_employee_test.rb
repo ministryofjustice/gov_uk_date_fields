@@ -12,14 +12,14 @@ class DefaultErrorClashEmployeeTest < ActiveSupport::TestCase
 
   def test_presence_error_messages_generated
     @employee.valid?
-    assert_equal ["can't be blank"], @employee.errors[:dob]
+    assert_equal ["Enter the date of birth"], @employee.errors[:dob]
     assert_equal ["can't be blank"], @employee.errors[:joined]
   end
 
   def test_invalid_day_adds_invalid_date_message_to_cant_be_blank_message
     @employee.dob_dd = '32'
     assert_false @employee.valid?
-    assert_equal ['Invalid date', "can't be blank"], @employee.errors[:dob]
+    assert_equal ['Invalid date', "Enter the date of birth"], @employee.errors[:dob]
     assert_equal ["can't be blank"], @employee.errors[:joined]
   end
 
