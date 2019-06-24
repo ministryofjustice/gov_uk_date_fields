@@ -13,7 +13,7 @@ module GovUkDateFields
 
     def test_new_raises_error_if_called_from_outside_class
       err = assert_raise NoMethodError do
-        fd = FormDate.new(2,3,2015)
+        FormDate.new(2,3,2015)
       end
       assert_equal "private method `new' called for GovUkDateFields::FormDate:Class", err.message
     end
@@ -81,11 +81,8 @@ module GovUkDateFields
       assert_equal '', fd.dd
       assert_equal '', fd.mm
       assert_equal '', fd.yyyy
-      assert_equal  nil, fd.date
+      assert_nil fd.date
       assert_true fd.valid?, "fd.valid?"
     end
-
-
-
   end
 end

@@ -180,7 +180,23 @@ module GovUkDateFields
       message&.sub default_label(attribute), localized_label(attribute)
     end
 
+    # If a form view is reused but the attribute doesn't change (for example in
+    # partials) an `i18n_attribute` can be used to lookup the legend or hint locales
+    # based on this, instead of the original attribute.
+    #
+    # We prioritise the `i18n_attribute` if provided, and if no locale is found,
+    # we try the 'real' attribute as a fallback and finally the default value.
+    #
     def localized scope, attribute, default
+      found = if @options[:i18n_attribute]
+        key = "#{@object_name}.#{@options[:i18n_attribute]}"
+
+        I18n.translate(key, default: '', scope: scope).presence ||
+          I18n.translate("#{key}_html", default: '', scope: scope).html_safe.presence
+      end
+
+      return found if found
+
       key = "#{@object_name}.#{attribute}"
 
       # Passes blank String as default because nil is interpreted as no default

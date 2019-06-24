@@ -46,4 +46,20 @@ class GovUkDateFieldsTest < ActiveSupport::TestCase
     )
     assert_html_equal(date_fields.raw_output, fixture)
   end
+
+  test 'date_fields with custom i18n_attribute' do
+    date_fields = GovUkDateFields::FormFields.new(
+      @form_builder, :employee, :dob, i18n_attribute: :custom_i18n_attribute
+    )
+
+    assert_match(
+      /<h1 class="govuk-fieldset__heading">A custom legend<\/h1>/,
+      date_fields.raw_output
+    )
+
+    assert_match(
+      /<span class="govuk-hint" id="employee_dob_hint">A custom hint<\/span>/,
+      date_fields.raw_output
+    )
+  end
 end

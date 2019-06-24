@@ -53,7 +53,7 @@ class EmployeeTest < ActiveSupport::TestCase
 
   def test_that_nil_can_be_assigned_to_a_date_field
     @employee.dob = nil
-    assert_equal nil, @employee.dob
+    assert_nil @employee.dob
     assert_equal '', @employee.dob_dd
     assert_equal '', @employee.dob_mm
     assert_equal '', @employee.dob_yyyy
@@ -118,7 +118,7 @@ class EmployeeTest < ActiveSupport::TestCase
 
   def test_creating_a_new_employee_with_invalid_dates_is_invalid
     e = Employee.new(name: 'Stephen', dob_dd: '13', dob_mm: 'XXX', dob_yyyy: '1963')
-    assert_equal nil, e.dob
+    assert_nil e.dob
     assert_false e.valid?
   end
 
