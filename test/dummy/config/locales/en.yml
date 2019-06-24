@@ -30,6 +30,7 @@ en:
     fieldset:
       employee:
         dob: Date of birth
+        custom_i18n_attribute: A custom legend
     label:
       dob:
         day: Day
@@ -38,3 +39,4 @@ en:
     hint:
       employee:
         dob: For example, 12 11 2007
+        custom_i18n_attribute: A custom hint

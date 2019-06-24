@@ -34,7 +34,7 @@ class DirectorTest < ActiveSupport::TestCase
 
   def test_creating_a_new_director_with_invalid_dates_is_valid_when_validation_disabled
     e = Director.new(name: 'Stephen', dob_dd: '13', dob_mm: 'XXX', dob_yyyy: '1963')
-    assert_equal nil, e.dob
+    assert_nil e.dob
     assert_true e.valid?
   end
 
