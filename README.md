@@ -358,9 +358,10 @@ the following HTML with gem version >= 3.1.0 and < 4.0.0:
 
 and the following HTML with gem version >= 4.0.0: [html fixture](test/dummy/test/fixtures/files/date_fields_no_error.html)
 
-See other examples in the file `test/form_fields_test.rb
-`
+See other examples in the file `test/form_fields_test.rb`
+
+Please note, version 4.0.0 and 4.0.1 will produce inputs with `type="number"` whereas versions >= 4.1.0 will produce inputs with `type="text" inputmode="numeric"`. These are semantically correct and provides a better experience in most browsers, including mobile.
+
 ## Licencing
 
 This project rocks and uses MIT-LICENSE.
-

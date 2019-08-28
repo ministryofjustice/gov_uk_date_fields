@@ -51,7 +51,7 @@ module GovUkDateFields
         content_tag(:div, class: 'govuk-form-group') do
           %Q|
             <label class="govuk-label govuk-date-input__label" for="#{html_id(name)}">#{localized_label(name)}</label>
-            <input class="#{css_class}" id="#{html_id(name)}" name="#{html_name(name)}" value="#{value}" type="number" pattern="[0-9]*">
+            <input class="#{css_class}" id="#{html_id(name)}" name="#{html_name(name)}" value="#{value}" type="text" inputmode="numeric" pattern="[0-9]*">
           |.html_safe
         end
       end
