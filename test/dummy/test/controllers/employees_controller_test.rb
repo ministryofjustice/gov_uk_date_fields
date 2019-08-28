@@ -74,7 +74,8 @@ class EmployeesControllerTest < ActionController::TestCase
     get :edit, params: { id: @employee }
 
     assert_select 'input#employee_dob_dd' do
-      assert_select '[type=?]','number'
+      assert_select '[type=?]','text'
+      assert_select '[inputmode=?]','numeric'
       assert_select '[pattern=?]','[0-9]*'
     end
   end
