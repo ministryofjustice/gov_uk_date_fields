@@ -21,5 +21,5 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib", "vendor"]
   s.test_files = Dir["test/**/*"]
 
-  s.add_dependency 'rails', '~> 6.0.3.7'
+  s.add_dependency 'rails', '~> 6.0'
 end
