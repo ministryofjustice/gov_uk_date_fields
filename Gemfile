@@ -16,7 +16,7 @@ group :test, :development do
   gem 'pry'
   gem 'pry-byebug'
   gem 'minitest-reporters', '~> 1.1', '>= 1.1.7'
-  gem 'pg', '~> 0.18.4'
+  gem 'pg', '~> 1.2.3'
   gem 'awesome_print', '~> 1.6'
   gem 'mocha', '~> 1.1'
   gem 'rails-controller-testing', '~> 1.0'
