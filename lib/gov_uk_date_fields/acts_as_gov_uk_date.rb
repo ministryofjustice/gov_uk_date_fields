@@ -28,12 +28,12 @@ module GovUkDateFields
             next if self.instance_variable_get("@_#{date_field}".to_sym).valid?
             case options[:error_clash_behaviour]
             when :append_gov_uk_date_field_error
-              errors[date_field] << "Invalid date"
+              errors.add(date_field, "Invalid date")
             when :omit_gov_uk_date_field_error
               next
             when :override_with_gov_uk_date_field_error
-              errors[date_field].clear
-              errors[date_field] << "Invalid date"
+              errors.delete(date_field)
+              errors.add(date_field, "Invalid date")
             end
           end
         end

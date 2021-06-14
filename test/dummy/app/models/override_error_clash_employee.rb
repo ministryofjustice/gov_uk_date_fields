@@ -2,7 +2,7 @@ class MyValidator < ActiveModel::Validator
   def validate(record)
     [:dob, :joined].each do |date_field|
       if record.__send__(date_field).nil?
-        record.errors[date_field] << "Can't be blank"
+        record.errors.add(date_field, "Can't be blank")
       end
     end
   end
