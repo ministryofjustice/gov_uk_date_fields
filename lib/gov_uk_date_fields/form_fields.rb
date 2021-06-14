@@ -58,7 +58,15 @@ module GovUkDateFields
     end
 
     def error_for_attr?
-      @object.errors.keys.include?(@attribute) && @object.errors[@attribute].any?
+      error_attribute_names.include?(@attribute) && @object.errors[@attribute].any?
+    end
+
+    def error_attribute_names
+      if @object.errors.respond_to?(:attribute_names)
+        @object.errors.attribute_names
+      else
+        @object.errors.keys
+      end
     end
 
     def html_id(date_segment)
