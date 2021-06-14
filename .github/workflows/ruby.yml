@@ -33,6 +33,6 @@ jobs:
         bundler-cache: true # runs 'bundle install' and caches installed gems automatically
     - name: Run tests
       run: |
-      cd test/dummy/
-      bundle exec rake db:setup
-      bundle exec rake test
+        cd test/dummy/
+        bundle exec rake db:setup
+        bundle exec rake test
