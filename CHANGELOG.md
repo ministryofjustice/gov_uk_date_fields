@@ -1,6 +1,25 @@
+# 4.2.0
+
+* Fixes deprecation warnings when using rails 6.1, which may break in rails 6.2.
+
+  ```
+  DEPRECATION WARNING: Calling `<<` to an ActiveModel::Errors message array in order to add an error is deprecated.
+  Please call `ActiveModel::Errors#add` instead.
+  ```
+  ```
+  DEPRECATION WARNING: Calling `clear` to an ActiveModel::Errors message array in order to delete all errors is deprecated.
+  Please call `ActiveModel::Errors#delete` instead.
+  ```
+  ```
+  DEPRECATION WARNING: ActiveModel::Errors#keys is deprecated and will be removed in Rails 6.2.
+  To achieve the same use:
+    errors.attribute_names
+  ```
+
 # 4.1.0
 
-* Markup will produce inputs with `type="text" inputmode="numeric"`.  
+* Markup will produce inputs with `type="text" inputmode="numeric"`.
+
 These are semantically correct and provides a better experience in most browsers, including mobile. More details in [this thread](https://github.com/alphagov/govuk-frontend/issues/1449#issuecomment-504006087)
 
 This change **might** break your code if you target the input (in javascript, CSS or cucumber for example) by `type="number"`.
