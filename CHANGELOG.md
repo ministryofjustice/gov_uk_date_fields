@@ -1,5 +1,7 @@
 # 4.2.0
 
+* BREAKING CHANGE: drop support for [End of life rails versions](https://endoflife.date/rails), name less that Rails 5.2
+
 * Fixes deprecation warnings when using rails 6.1, which may break in rails 6.2.
 
   ```
